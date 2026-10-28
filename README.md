@@ -6,7 +6,7 @@ Devlog runs in VS Code and opens your stats in your browser. See how much time y
 
 [Install from the VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=ardazeybek.devlog-coding-activity) · [Report a bug](https://github.com/ardazeybek/devlog/issues) · [Get in touch](mailto:quantastudio.dev@gmail.com)
 
-![Devlog overview: coding time, streaks, languages, and a daily goal](media/overview.gif)
+![Devlog overview: coding time, streaks, languages, and a daily goal](https://raw.githubusercontent.com/ardazeybek/devlog/main/media/overview.gif)
 
 *The images use sample activity, not someone's personal coding history.*
 
@@ -14,7 +14,7 @@ Devlog runs in VS Code and opens your stats in your browser. See how much time y
 
 Set a daily goal, build a streak, and earn achievements as you code. There are **229 achievements and 36 titles** to work toward. Titles need both XP and completed tasks, so collecting easy achievements alone won't unlock the higher ones.
 
-![229 achievements and 36 titles in Devlog](media/achievements.png)
+![229 achievements and 36 titles in Devlog](https://raw.githubusercontent.com/ardazeybek/devlog/main/media/achievements.png)
 
 ## Get started
 

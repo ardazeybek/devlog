@@ -1,0 +1,121 @@
+{
+  "name": "devlog-coding-activity",
+  "displayName": "Devlog \u2014 Coding Activity",
+  "description": "Track your coding time and see your progress.",
+  "version": "1.1.0",
+  "publisher": "ardazeybek",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "devlog.open",
+        "title": "Devlog: Open Dashboard",
+        "icon": "$(link-external)"
+      },
+      {
+        "command": "devlog.pause",
+        "title": "Devlog: Pause / Resume Tracking"
+      }
+    ],
+    "configuration": {
+      "title": "Devlog",
+      "properties": {
+        "devlog.dailyGoalMinutes": {
+          "type": "integer",
+          "default": 120,
+          "minimum": 15,
+          "maximum": 720,
+          "description": "Daily active coding goal in minutes."
+        },
+        "devlog.excludedPaths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "node_modules",
+            "dist",
+            "build",
+            "vendor",
+            ".git",
+            "generated"
+          ],
+          "description": "Folder names excluded from activity tracking."
+        }
+      }
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "devlog",
+          "title": "Devlog",
+          "icon": "media/devlog.svg"
+        }
+      ]
+    },
+    "views": {
+      "devlog": [
+        {
+          "id": "devlog.launcher",
+          "name": "Coding Activity"
+        }
+      ]
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "devlog.open",
+          "when": "view == devlog.launcher",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "license": "MIT",
+  "icon": "media/icon.png",
+  "extensionKind": [
+    "ui"
+  ],
+  "keywords": [
+    "coding",
+    "activity",
+    "time tracker",
+    "productivity",
+    "dashboard"
+  ],
+  "scripts": {
+    "test": "node scripts/test.js"
+  },
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true,
+      "description": "Devlog counts local editor activity without executing workspace code."
+    },
+    "virtualWorkspaces": {
+      "supported": false,
+      "description": "Devlog supports local files and unsaved documents."
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ardazeybek/devlog.git"
+  },
+  "homepage": "https://github.com/ardazeybek/devlog#readme",
+  "bugs": {
+    "url": "https://github.com/ardazeybek/devlog/issues",
+    "email": "quantastudio.dev@gmail.com"
+  },
+  "galleryBanner": {
+    "color": "#e5efea",
+    "theme": "light"
+  }
+}

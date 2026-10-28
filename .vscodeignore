@@ -1,0 +1,16 @@
+**
+!package.json
+!extension.js
+!core.js
+!storage.js
+!README.md
+!LICENSE
+!CHANGELOG.md
+!PRIVACY.md
+!media/
+!media/devlog.svg
+!media/icon.png
+!web/
+!web/**
+!CONTRIBUTING.md
+!SUPPORT.md

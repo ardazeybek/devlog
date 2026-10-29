@@ -1,6 +1,6 @@
 {
   "name": "devlog-coding-activity",
-  "displayName": "devlog",
+  "displayName": "devlog — Coding Activity",
   "description": "Track your coding time and see your progress.",
   "version": "1.2.0",
   "publisher": "ardazeybek",
@@ -98,11 +98,11 @@
   "capabilities": {
     "untrustedWorkspaces": {
       "supported": true,
-      "description": "Devlog counts local editor activity without executing workspace code."
+      "description": "devlog counts local editor activity without executing workspace code."
     },
     "virtualWorkspaces": {
       "supported": false,
-      "description": "Devlog supports local files and unsaved documents."
+      "description": "devlog supports local files and unsaved documents."
     }
   },
   "repository": {

@@ -1,4 +1,4 @@
-# Contributing to Devlog
+# Contributing to devlog
 
 Thanks for taking a look. You can help with a bug report, an idea, clearer wording, or a code change.
 

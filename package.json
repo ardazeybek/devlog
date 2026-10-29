@@ -1,8 +1,8 @@
 {
   "name": "devlog-coding-activity",
-  "displayName": "Devlog \u2014 Coding Activity",
+  "displayName": "devlog",
   "description": "Track your coding time and see your progress.",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "publisher": "ardazeybek",
   "engines": {
     "vscode": "^1.90.0"
@@ -18,16 +18,16 @@
     "commands": [
       {
         "command": "devlog.open",
-        "title": "Devlog: Open Dashboard",
+        "title": "devlog: Open Dashboard",
         "icon": "$(link-external)"
       },
       {
         "command": "devlog.pause",
-        "title": "Devlog: Pause / Resume Tracking"
+        "title": "devlog: Pause / Resume Tracking"
       }
     ],
     "configuration": {
-      "title": "Devlog",
+      "title": "devlog",
       "properties": {
         "devlog.dailyGoalMinutes": {
           "type": "integer",
@@ -57,7 +57,7 @@
       "activitybar": [
         {
           "id": "devlog",
-          "title": "Devlog",
+          "title": "devlog",
           "icon": "media/devlog.svg"
         }
       ]

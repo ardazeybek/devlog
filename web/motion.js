@@ -1,8 +1,7 @@
 /* Motion changes presentation only. It never changes recorded statistics. */
 (function(){
- const preference=matchMedia('(prefers-reduced-motion: reduce)');
- let enabled=localStorage.getItem('devlog-motion')!=='off',observer=null,frames=new Set(),effects=new Set(),counters=new Set(),pointerFrame=0;
- const active=()=>enabled&&!preference.matches;
+ let observer=null,frames=new Set(),effects=new Set(),counters=new Set(),pointerFrame=0;
+ const active=()=>true;
  function sync(){document.documentElement.classList.toggle('motion-on',active());}
  function run(el,keys,options){if(!active()||!el?.animate)return;const a=el.animate(keys,options);effects.add(a);a.finished.catch(()=>{}).finally(()=>effects.delete(a));return a;}
  function frame(fn){const id=requestAnimationFrame(t=>{frames.delete(id);fn(t);});frames.add(id);}
@@ -11,7 +10,7 @@
  function count(el){const value=Number(el.dataset.count),type=el.dataset.format;if(!Number.isFinite(value)||value<=0)return;
  const final=el.textContent;el.setAttribute('aria-label',final);const text=document.createElement('span');text.setAttribute('aria-hidden','true');el.replaceChildren(text);const finish=()=>{text.textContent=final;counters.delete(finish);};counters.add(finish);let start;
  const draw=t=>{if(!el.isConnected)return;if(start===undefined)start=t;const p=Math.min(1,(t-start)/850),v=Math.floor(value*(1-Math.pow(1-p,3)));
- text.textContent=type==='duration'?`${Math.floor(v/3600)}h ${Math.floor(v/60)%60}m`:type==='days'?`${v} days`:v.toLocaleString('en-US');if(p<1&&active())frame(draw);else finish();};frame(draw);
+ text.textContent=type==='duration'?`${Math.floor(v/3600)}h ${Math.floor(v/60)%60}m`:type==='days'?`${v} ${v===1?'day':'days'}`:v.toLocaleString('en-US');if(p<1&&active())frame(draw);else finish();};frame(draw);
  }
  function chartMotion(){document.querySelectorAll('.chart').forEach(chart=>{
  const line=chart.querySelector('polyline');if(line)run(line,[{strokeDasharray:'1 1',strokeDashoffset:1},{strokeDasharray:'1 1',strokeDashoffset:0}],{duration:1250,easing:soft});
@@ -42,8 +41,6 @@
  document.addEventListener('pointermove',e=>{if(!active()||e.pointerType==='touch'||pointerFrame)return;const card=e.target.closest('.card,.metric,.award,.title-card');if(!card)return;
  pointerFrame=requestAnimationFrame(()=>{pointerFrame=0;if(!card.isConnected)return;const r=card.getBoundingClientRect();card.style.setProperty('--light-x',`${e.clientX-r.left}px`);card.style.setProperty('--light-y',`${e.clientY-r.top}px`);});
  },{passive:true});
- function setEnabled(value){enabled=!!value;localStorage.setItem('devlog-motion',enabled?'on':'off');sync();if(!active())beforeRender();}
- preference.addEventListener('change',()=>{sync();if(!active())beforeRender();});
  document.addEventListener('visibilitychange',()=>document.documentElement.classList.toggle('motion-paused',document.hidden));
- sync();window.DevlogMotion={beforeRender,afterRender,feedback,setEnabled,get enabled(){return enabled;}};
+ sync();window.DevlogMotion={beforeRender,afterRender,feedback};
 })();

@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.2.0
+
+- Renamed the app to devlog.
+- Added silent achievement and title notifications with confetti in the dashboard.
+- Added VS Code notifications when the dashboard is not visible.
+- Replaced native dropdowns with glass menus, including keyboard navigation.
+- Removed the animation switch. Animations stay on.
+
 ## 1.1.0
 
 - Removed the data download and preview controls from the dashboard.

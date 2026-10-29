@@ -23,7 +23,7 @@ function metrics(days){
  return m;
 }
 function evaluate(days){const m=metrics(days),a=[];
- function series(group,id,name,levels,value,unit,reason){levels.forEach((target,i)=>a.push({id:id+'-'+target,group,name:`${name} · ${target} ${target===1?unit.replace(/s$/,''):unit}`,description:reason.replace('{n}',target).replace(/1 hours\b/,'1 hour'),value,target,tier:i+1,points:(i+1)*25,earned:value>=target}));}
+ function series(group,id,name,levels,value,unit,reason){levels.forEach((target,i)=>a.push({id:id+'-'+target,group,name:`${name} · ${target} ${target===1?unit.replace(/s$/,''):unit}`,description:reason.replace('{n}',target).replace(/1 hours\b/,'1 hour').replace(/\b1 different days\b/,'1 day').replace(/\b1 different weeks\b/,'1 week').replace(/\b1 different months\b/,'1 month').replace(/\b1 weeks\b/,'1 week'),value,target,tier:i+1,points:(i+1)*25,earned:value>=target}));}
  series('Effort','hours','Time invested',[1,5,10,25,50,100,200,300,500,750,1000,1500],m.hours,'hours','Code for {n} hours in total.');
  series('Consistency','days','Coding habit',[1,3,7,14,30,60,90,120,180,250,365,500],m.days,'days','Code for at least 15 minutes on {n} different days.');
  series('Consistency','streak','Daily streak',[3,5,7,10,14,21,30],m.bestStreak,'days','Code for at least 15 minutes a day for {n} consecutive days.');
@@ -43,7 +43,7 @@ function evaluate(days){const m=metrics(days),a=[];
 }
 function titles(days){
  const m=metrics(days),xp=evaluate(days).filter(a=>a.earned).reduce((n,a)=>n+a.points,0);
- const task=(key,target,label)=>({label,value:m[key]||0,target,done:(m[key]||0)>=target});
+ const task=(key,target,label)=>({label:label.replace(/\b1 hours\b/g,'1 hour').replace(/\b1 different days\b/g,'1 day'),value:m[key]||0,target,done:(m[key]||0)>=target});
  const out=[];
  function add(id,name,need,tasks,kind='Journey'){
   const checks=[{label:`${need.toLocaleString('en-US')} XP`,value:xp,target:need,done:xp>=need},...tasks];

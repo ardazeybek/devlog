@@ -1,6 +1,6 @@
-# Working on Devlog
+# Working on devlog
 
-Devlog is a VS Code extension with a browser dashboard. The first version was written with AI. This guide is also a starting point for learning how the pieces work.
+devlog is a VS Code extension with a browser dashboard. The first version was written with AI. This guide is also a starting point for learning how the pieces work.
 
 ## Files to start with
 
@@ -20,7 +20,7 @@ Some HTML is written as template strings in `web/app.js`, so a change to a card 
 
 ## Run it locally
 
-Use desktop VS Code 1.90 or newer. Open this folder and press F5. A separate Extension Development Host window opens with Devlog loaded. Edit a file in that window, then use **Devlog: Open Dashboard**.
+Use desktop VS Code 1.90 or newer. Open this folder and press F5. A separate Extension Development Host window opens with devlog loaded. Edit a file in that window, then use **devlog: Open Dashboard**.
 
 The dashboard server starts only when you open it. It listens on `127.0.0.1` and protects the data API with a random token. Keep development data separate from your normal VS Code profile.
 

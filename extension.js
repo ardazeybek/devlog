@@ -6,23 +6,37 @@ const http = require('node:http');
 const crypto = require('node:crypto');
 const { dayKey, classify, eligibleDocument, trackedLanguage } = require('./core');
 const { emptyDay, aggregate, atomicWrite } = require('./storage');
+const { RewardTracker } = require('./rewards');
 
 function activate(context) {
   const root = context.globalStorageUri.fsPath;
   try { fs.mkdirSync(root, { recursive: true, mode: 0o700 }); }
-  catch { vscode.window.showErrorMessage('Devlog cannot access its data folder. Check folder permissions and reload VS Code.'); return; }
+  catch { vscode.window.showErrorMessage('devlog cannot access its data folder. Check folder permissions and reload VS Code.'); return; }
   const file = path.join(root, crypto.randomUUID() + '.json');
   const data = { version: 1, days: Object.create(null) };
   let paused = false, lastInput = 0, lastTick = Date.now(), active = null, storageError = false;
   let server, serverReady, port, disposed = false;
+  let rewards;
+  try { rewards = new RewardTracker(root, aggregate(root).days); } catch {}
+  let dashboardVisibleAt = -Infinity;
+  function checkRewards() {
+    if (storageError) return;
+    try {
+      const events = rewards?.poll(aggregate(root).days) || [];
+      if (!events.length || Date.now() - dashboardVisibleAt < 20000) return;
+      const title = events.find(event => event.kind === 'title');
+      const message = title ? 'New title: ' + title.name + '. Nice work!' : 'You did it! ' + events[0].name + (events.length > 1 ? ' and ' + (events.length - 1) + ' more.' : '.');
+      Promise.resolve(vscode.window.showInformationMessage('devlog — ' + message, 'View achievements')).then(action => { if (action === 'View achievements') openPanel('awards'); }).catch(() => {});
+    } catch {}
+  }
   const token = crypto.randomBytes(32).toString('hex');
   const status = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 10);
-  status.command = 'devlog.open'; status.text = '$(pulse) Devlog'; status.show();
+  status.command = 'devlog.open'; status.text = '$(pulse) devlog'; status.show();
   context.subscriptions.push(status);
 
   function save() {
     try { atomicWrite(file, data); storageError = false; }
-    catch { storageError = true; status.text = '$(warning) Devlog'; status.tooltip = 'Could not save activity. Check available disk space and folder permissions.'; }
+    catch { storageError = true; status.text = '$(warning) devlog'; status.tooltip = 'Could not save activity. Check available disk space and folder permissions.'; }
   }
   function bucket() { return data.days[dayKey()] ??= emptyDay(); }
   function languageIds() {
@@ -35,7 +49,7 @@ function activate(context) {
   function stats() {
     const combined = aggregate(root);
     return { days: combined.days, goal: vscode.workspace.getConfiguration('devlog').get('dailyGoalMinutes', 120),
-      paused, live: true, languages: languageIds(),
+      paused, live: true, languages: languageIds(), rewardEvents: rewards?.recent() || [],
       issue: storageError ? 'STORAGE_WRITE_FAILED' : combined.unreadableFiles ? 'PARTIAL_DATA' : null };
   }
   context.subscriptions.push(vscode.workspace.onDidChangeTextDocument(event => {
@@ -62,9 +76,10 @@ function activate(context) {
       day.projects[active.project] = (day.projects[active.project] || 0) + elapsed;
       day.languages[active.language] = (day.languages[active.language] || 0) + elapsed;
       save();
+      checkRewards();
     }
-    status.text = storageError ? '$(warning) Devlog' : paused ? '$(debug-pause) Devlog' : '$(pulse) Devlog';
-    status.tooltip = storageError ? 'Could not save activity. Check disk space and folder permissions.' : paused ? 'Tracking paused. Click to open Devlog.' : active && now - lastInput <= 60000 ? 'Tracking ' + active.language + '. Click to open Devlog.' : 'Waiting for an edit. Saved and unsaved files are supported. Click to open Devlog.';
+    status.text = storageError ? '$(warning) devlog' : paused ? '$(debug-pause) devlog' : '$(pulse) devlog';
+    status.tooltip = storageError ? 'Could not save activity. Check disk space and folder permissions.' : paused ? 'Tracking paused. Click to open devlog.' : active && now - lastInput <= 60000 ? 'Tracking ' + active.language + '. Click to open devlog.' : 'Waiting for an edit. Saved and unsaved files are supported. Click to open devlog.';
   }, 5000);
 
   function reply(response, code, value) {
@@ -84,6 +99,8 @@ function activate(context) {
       if (request.headers.origin && request.headers.origin !== origin) return reply(response, 403, { error: 'INVALID_ORIGIN' });
       if (url.pathname === '/api/stats') {
         if (request.method !== 'GET') return reply(response, 405, { error: 'METHOD_NOT_ALLOWED' });
+        if (request.headers['x-devlog-visible'] === '1') dashboardVisibleAt = Date.now();
+        else if (request.headers['x-devlog-visible'] === '0') dashboardVisibleAt = -Infinity;
         try { return reply(response, 200, stats()); } catch { return reply(response, 500, { error: 'STORAGE_UNAVAILABLE' }); }
       }
       if (url.pathname === '/api/settings') {
@@ -110,7 +127,7 @@ function activate(context) {
       return reply(response, 404, { error: 'NOT_FOUND' });
     }
     if (request.method !== 'GET' && request.method !== 'HEAD') return reply(response, 405, { error: 'METHOD_NOT_ALLOWED' });
-    const files = { '/': 'index.html', '/app.js': 'app.js', '/motion.js': 'motion.js', '/achievements.js': 'achievements.js', '/languages.js': 'languages.js', '/style.css': 'style.css' };
+    const files = { '/': 'index.html', '/app.js': 'app.js', '/motion.js': 'motion.js', '/achievements.js': 'achievements.js', '/languages.js': 'languages.js', '/controls.js': 'controls.js', '/celebrations.js': 'celebrations.js', '/style.css': 'style.css' };
     let name = files[url.pathname];
     // Icons are the only directory served; never serve arbitrary files or data.
     if (/^\/icons\/[a-z0-9-]+\.svg$/.test(url.pathname)) name = url.pathname.slice(1);
@@ -121,7 +138,7 @@ function activate(context) {
       response.end(request.method === 'HEAD' ? undefined : content);
     } catch { reply(response, 404, { error: 'NOT_FOUND' }); }
   }
-  async function openPanel() {
+  async function openPanel(view) {
     if (disposed) return;
     if (!serverReady) {
       serverReady = new Promise((resolve, reject) => {
@@ -133,9 +150,9 @@ function activate(context) {
     }
     try {
       await serverReady;
-      const opened = await vscode.env.openExternal(vscode.Uri.parse(`http://127.0.0.1:${port}/#${token}`));
-      if (opened === false) vscode.window.showErrorMessage('Devlog could not open your browser. Check your default browser and try Open Dashboard again.');
-    } catch { vscode.window.showErrorMessage('Devlog could not start its local dashboard. Reload VS Code and try Open Dashboard again.'); }
+      const opened = await vscode.env.openExternal(vscode.Uri.parse(`http://127.0.0.1:${port}/${view === 'awards' ? '?tab=awards' : ''}#${token}`));
+      if (opened === false) vscode.window.showErrorMessage('devlog could not open your browser. Check your default browser and try Open Dashboard again.');
+    } catch { vscode.window.showErrorMessage('devlog could not start its local dashboard. Reload VS Code and try Open Dashboard again.'); }
   }
   const tree = vscode.window.createTreeView('devlog.launcher', { treeDataProvider: {
     getTreeItem: item => item,
@@ -148,7 +165,7 @@ function activate(context) {
   context.subscriptions.push(tree, vscode.commands.registerCommand('devlog.open', openPanel),
     vscode.commands.registerCommand('devlog.pause', () => {
       paused = !paused; reset();
-      vscode.window.showInformationMessage(paused ? 'Devlog tracking paused.' : 'Devlog tracking resumed.');
+      vscode.window.showInformationMessage(paused ? 'devlog tracking paused.' : 'devlog tracking resumed.');
     }), { dispose() { disposed = true; clearInterval(timer); save(); server?.close(); } });
 }
 module.exports = { activate };

@@ -8,7 +8,7 @@ devlog runs in VS Code and opens your stats in your browser. See how much time y
 
 ![devlog overview: coding time, streaks, languages, and a daily goal](https://raw.githubusercontent.com/ardazeybek/devlog/main/media/overview.gif)
 
-*The images use sample activity, not someone's personal coding history.*
+_The images use sample activity, not someone's personal coding history._
 
 ## A little motivation to keep going
 
@@ -55,6 +55,6 @@ devlog uses JavaScript, HTML, and CSS. There are no runtime dependencies.
 
 - Use Node.js 20 or newer and run `npm test`.
 - Open the folder in VS Code and press **F5** to try the extension in a separate window.
-- See [Development](DEVELOPMENT.md) for how tracking, storage, and the dashboard fit together.
+- Start with [Development](DEVELOPMENT.md), the [project map](docs/architecture/project-map.md), and the [data flow](docs/architecture/data-flow.md).
 
 Free to use under the [MIT license](LICENSE). Read the [privacy note](PRIVACY.md) for details about saved data.

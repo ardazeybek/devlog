@@ -10,6 +10,7 @@ about: Something is not working
 **How can we reproduce it?**
 
 **Your setup**
+
 - Operating system:
 - VS Code version:
 - Devlog version:

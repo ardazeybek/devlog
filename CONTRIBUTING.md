@@ -10,12 +10,15 @@ For bigger changes, open an issue first so we can discuss the idea before you sp
 
 ## Send a change
 
-1. Fork the repository and create a branch for your change.
-2. Make a focused change and explain why it helps.
-3. Run `npm test` with Node.js 20 or newer. For UI changes, include a screenshot.
-4. Open a pull request against `main`.
+1. Obtain prior written permission from Arda at quantastudio.dev@gmail.com before copying, running, or modifying the code for a contribution. GitHub platform rights remain unaffected.
+2. Once authorized, fork the repository and create a branch for your change.
+3. Make a focused change and explain why it helps.
+4. Run `npm test` with Node.js 20 or newer. For UI changes, include a screenshot.
+5. Open a pull request against `main`.
 
 Arda reviews pull requests before they are merged. Sending a pull request does not give direct write access to the project. Accepted code changes keep their author credit; GitHub lists contributors based on commits merged into the default branch.
+
+Use Node.js 20 or newer and desktop VS Code 1.90 or newer. Open the repository and press **F5** to launch the extension; see [Development](DEVELOPMENT.md). No build step or runtime dependency installation is required. For formatting, run `npm ci` followed by `npm run format:check`. Follow the module layout in [AGENTS.md](AGENTS.md).
 
 Keep the interface in English and make wording easy to understand. Don't add telemetry, upload activity, or commit real coding history, passwords, or tokens. Keep screenshots and tests separate from real user data.
 

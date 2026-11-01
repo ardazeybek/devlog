@@ -1,80 +1,126 @@
-# devlog
+<div align="center">
+  <img src="media/icon.png" alt="devlog icon" width="80" />
+  <h1>devlog</h1>
+  <p><strong>See where your coding time goes, right from VS Code.</strong></p>
+  <p>A local activity tracker with a browser dashboard for your time, projects, languages, and goals.</p>
+  <p><a href="#get-started">Get started</a> · <a href="#run-from-source">Setup</a> · <a href="CONTRIBUTING.md">Contribute</a> · <a href="mailto:quantastudio.dev@gmail.com">Contact</a></p>
+</div>
 
-**Track your coding time and see your progress.**
+![The devlog Overview page opening with animated time cards and activity charts](media/overview.gif)
 
-devlog runs in VS Code and opens your stats in your browser. See how much time you spend coding, what you work on, and how your habits change.
+_The real dashboard opening with synthetic activity. The cards and charts animate into view; no personal coding history is shown._
 
-[Install from the VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=ardazeybek.devlog-coding-activity) · [Report a bug](https://github.com/ardazeybek/devlog/issues) · [Get in touch](mailto:quantastudio.dev@gmail.com)
+## What is devlog?
 
-![devlog overview: today's time, weekly total, coding streak, and time by language](https://raw.githubusercontent.com/ardazeybek/devlog/main/media/overview.gif)
+Devlog helps developers understand how much time they spend actively editing code and which projects and languages they work on. It runs as a desktop VS Code extension and opens its dashboard in your browser.
 
-_The screenshots and the overview GIF move through Overview, Achievements, Projects, and Reports. They use sample activity, not someone's personal coding history._
+Activity stays on your computer. There is no account, subscription, or external service to configure. Desktop VS Code on Windows, macOS, and Linux is supported.
 
-## Screens
+## Features
 
-| Overview                                                                                                                                                             | Statistics                                                                                                                                                        |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ![Overview page with today, last 7 days, streak, active time and languages](https://raw.githubusercontent.com/ardazeybek/devlog/main/media/screenshots/overview.png) | ![Statistics page with a daily chart, a 365-day heatmap and languages](https://raw.githubusercontent.com/ardazeybek/devlog/main/media/screenshots/statistics.png) |
-
-| Projects                                                                                                                                          | Reports                                                                                                                                                        |
-| ------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ![Projects page with a project table and project groups](https://raw.githubusercontent.com/ardazeybek/devlog/main/media/screenshots/projects.png) | ![Reports page with weekly and monthly summaries, sharing and exports](https://raw.githubusercontent.com/ardazeybek/devlog/main/media/screenshots/reports.png) |
-
-| Achievements                                                                                                                                   | Settings                                                                                                                                                  |
-| ---------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ![Achievements page with progress, XP and titles](https://raw.githubusercontent.com/ardazeybek/devlog/main/media/screenshots/achievements.png) | ![Settings page with daily and weekly goals, backup and restore](https://raw.githubusercontent.com/ardazeybek/devlog/main/media/screenshots/settings.png) |
-
-## A little motivation to keep going
-
-Set a daily goal, build a streak, and earn achievements as you code. There are **229 achievements and 36 titles** to work toward. Titles need both XP and completed tasks, so collecting easy achievements alone won't unlock the higher ones.
-
-![229 achievements and 36 titles in devlog](https://raw.githubusercontent.com/ardazeybek/devlog/main/media/achievements.png)
-
-## Reports, notes, and projects
-
-The **Reports** page compares your week and month with the same days before, and points out your main project and language. Share a card with your weekly total (project names can stay hidden), or export CSV or a backup JSON file. Print or save a PDF from the same page.
-
-Add a short journal note to remember what you worked on. In **Projects**, group related projects together and see how each one is split across branches.
+- **Time and habits** — See daily totals, recent activity, streaks, and a yearly heatmap.
+- **Projects and languages** — Find where your time goes, inspect branches, and group related projects.
+- **Goals and achievements** — Set daily and weekly targets and follow your progress through achievements and titles.
+- **Reports and exports** — Compare weeks and months, export CSV or JSON backups, and print reports to PDF.
+- **Notes and sharing** — Add a short journal note and create a weekly summary card with optional project names.
+- **Local controls** — Pause tracking, exclude projects or folders, and back up or restore activity.
 
 ## Get started
 
-1. Install devlog from the link above.
-2. Write some code in a saved or unsaved file.
-3. Click devlog in the VS Code sidebar, then **Open Dashboard**. You can also click devlog in the bottom status bar.
-4. Choose your daily goal in **Settings**.
+Use requires the owner's prior written permission; see [License](#license). Contact [Arda](mailto:quantastudio.dev@gmail.com) before installing, running, or modifying devlog.
 
-devlog works on desktop VS Code for Windows, macOS, and Linux. Your activity stays on your computer. No account or subscription is needed.
+The Marketplace listing could not be verified. For an installation package, contact the owner; authorized contributors can also [run from source](#run-from-source).
 
-New achievements and titles come with a silent notification. The dashboard celebrates with a small confetti burst; when it is closed, VS Code lets you know instead. Existing achievements are not replayed when you open the app.
+1. Install the package supplied by the owner in desktop VS Code using **Extensions: Install from VSIX**.
+2. Edit a saved or unsaved file.
+3. Run **devlog: Open Dashboard** from the Command Palette, or use the devlog sidebar or status bar.
+4. Open **Settings** in the dashboard to choose daily and weekly goals.
 
-## How time is counted
+Keep VS Code open while using the dashboard. If it disconnects, run **devlog: Open Dashboard** again.
 
-devlog counts time while VS Code is focused and you're making small edits in the active file. It stops after a minute without an edit. Reading, terminal work, and time in other apps are not counted. Pasting a large block or using undo does not start the timer.
+### How time is counted
 
-Unsaved files work too. Pick the right language in VS Code for accurate stats. Plain Text counts toward your time but does not appear as a programming language.
+Devlog counts active editing while VS Code is focused. By default, counting stops after 60 seconds without an edit. Reading, terminal work, and time in other apps are not counted. Large pastes and undo operations do not start the timer.
 
-Use **Pause / Resume Tracking** in the sidebar to take a break. If the dashboard loses its connection, open it again from VS Code.
+Unsaved files are supported; select their language in VS Code for accurate language statistics. Plain Text contributes to time totals but is not listed as a programming language. Use **devlog: Pause / Resume Tracking** to take a break.
 
-## How this project was made
+### A closer look
 
-**devlog started as an AI-built project.** I came up with the idea, chose the features and design, and tried the app as it was built. AI wrote the initial code. I don't yet understand every part of it, and I don't present it as code I wrote entirely by hand.
+![Overview with daily and weekly time cards, activity chart, languages, and goals](media/screenshots/overview.png)
 
-I'm currently learning HTML. As I learn, I plan to take on the HTML changes and fixes myself, then gradually work through the rest of the project. My goal is to understand the whole app and be able to maintain and develop it on my own.
+_Overview brings your recent activity and goals together._
 
-I keep [the projects I code myself and my AI-built projects separate on my profile](https://github.com/ardazeybek#readme), so it's clear how each one was made.
+<details>
+<summary>Explore projects, reports, and other screens</summary>
 
-## Want to help?
+![Projects showing coding time and project groups](media/screenshots/projects.png)
 
-Bug reports, ideas, documentation fixes, and code contributions are welcome. Open an issue or send a pull request. I'll review proposed changes before merging them. See [Contributing](CONTRIBUTING.md) for the steps.
+_Projects helps you compare work and organize related projects._
 
-You can also reach me at **quantastudio.dev@gmail.com**. If devlog is useful to you, a GitHub star is a nice way to support it.
+![Reports showing period comparisons and export options](media/screenshots/reports.png)
 
-## Working on the code
+_Reports compares your activity and provides sharing and export tools._
 
-devlog uses JavaScript, HTML, and CSS. There are no runtime dependencies.
+[Statistics](media/screenshots/statistics.png) · [Achievements](media/screenshots/achievements.png) · [Settings](media/screenshots/settings.png)
 
-- Use Node.js 20 or newer and run `npm test`.
-- Open the folder in VS Code and press **F5** to try the extension in a separate window.
-- Start with [Development](DEVELOPMENT.md), the [project map](docs/architecture/project-map.md), and the [data flow](docs/architecture/data-flow.md).
+</details>
 
-All rights reserved. The source is published for viewing only; see the [license](LICENSE). Read the [privacy note](PRIVACY.md) for details about saved data.
+## Run from source
+
+These instructions are for the owner and contributors with written permission. They do not grant a license.
+
+You need **Node.js 20 or newer**, **Git**, and **desktop VS Code 1.90 or newer**.
+
+```sh
+git clone https://github.com/ardazeybek/devlog.git
+cd devlog
+code .
+```
+
+1. Press **F5** in VS Code and select **Run Devlog** if prompted. This opens an Extension Development Host window.
+2. Open a sample project in that window and edit a file.
+3. Run **devlog: Open Dashboard** there. Your browser opens a local address selected by the extension.
+
+There is no build step, runtime dependency installation, API key, environment file, or database setup. Use a separate VS Code development profile to keep test activity apart from your own history.
+
+## Development
+
+The extension uses JavaScript with CommonJS; the dashboard uses HTML, CSS, and native JavaScript modules. No runtime dependencies are required.
+
+```sh
+# Run the existing checks without installing dependencies
+npm test
+
+# Install the development formatter and check formatting
+npm ci
+npm run format:check
+```
+
+Start with [Development](DEVELOPMENT.md), the [project map](docs/architecture/project-map.md), and the [data flow](docs/architecture/data-flow.md). Packaging instructions are in the development guide.
+
+### How this project was made
+
+Devlog started as an AI-built project. I came up with the idea, chose the features and design, and tested the app as it was built. AI wrote the initial code; I do not present it as code I wrote entirely by hand.
+
+I am learning HTML and plan to take on changes gradually so I can understand and maintain the app myself. My [profile](https://github.com/ardazeybek#readme) distinguishes projects I code myself from AI-built projects.
+
+## Contributing
+
+Bug reports, feature ideas, documentation, translations, testing, design, and accessibility feedback are welcome through [Issues](https://github.com/ardazeybek/devlog/issues).
+
+For code changes, discuss your idea and obtain written permission first. Then create a branch, make a focused change, run the relevant checks, and open a pull request. See [CONTRIBUTING.md](CONTRIBUTING.md) for setup, review expectations, and contribution terms.
+
+## Support and contact
+
+- **Bugs and feature requests:** [GitHub Issues](https://github.com/ardazeybek/devlog/issues).
+- **Questions, collaboration, and permission requests:** [quantastudio.dev@gmail.com](mailto:quantastudio.dev@gmail.com).
+- **Help with tracking or connecting:** [Support guide](SUPPORT.md).
+- **What is saved locally:** [Privacy note](PRIVACY.md).
+
+## License
+
+**Copyright © 2026 Arda Zeybek. All rights reserved.**
+
+This is proprietary software, not an open-source project. Viewing the source does not grant permission to run, copy, modify, redistribute, sell, or use it in another project. Obtain prior written permission from the owner. See [LICENSE](LICENSE).
+
+GitHub's platform terms and rights required by applicable law still apply, including viewing and forking public repositories within GitHub. Third-party components retain their own licenses.

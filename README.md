@@ -1,12 +1,12 @@
 <div align="center">
-  <img src="media/icon.png" alt="devlog icon" width="80" />
+  <img src="https://raw.githubusercontent.com/ardazeybek/devlog/main/media/icon.png" alt="devlog icon" width="80" />
   <h1>devlog</h1>
   <p><strong>See where your coding time goes, right from VS Code.</strong></p>
   <p>A local activity tracker with a browser dashboard for your time, projects, languages, and goals.</p>
   <p><a href="#get-started">Get started</a> · <a href="#run-from-source">Setup</a> · <a href="CONTRIBUTING.md">Contribute</a> · <a href="mailto:quantastudio.dev@gmail.com">Contact</a></p>
 </div>
 
-![The devlog Overview page opening with animated time cards and activity charts](media/overview.gif)
+![The devlog Overview page opening with animated time cards and activity charts](https://raw.githubusercontent.com/ardazeybek/devlog/main/media/overview.gif)
 
 _The real dashboard opening with synthetic activity. The cards and charts animate into view; no personal coding history is shown._
 
@@ -29,9 +29,9 @@ Activity stays on your computer. There is no account, subscription, or external 
 
 Use requires the owner's prior written permission; see [License](#license). Contact [Arda](mailto:quantastudio.dev@gmail.com) before installing, running, or modifying devlog.
 
-The Marketplace listing could not be verified. For an installation package, contact the owner; authorized contributors can also [run from source](#run-from-source).
+The extension is available on the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=ardazeybek.devlog-coding-activity). Authorized contributors can also [run from source](#run-from-source).
 
-1. Install the package supplied by the owner in desktop VS Code using **Extensions: Install from VSIX**.
+1. Install **devlog — Coding Activity** from the Marketplace in desktop VS Code.
 2. Edit a saved or unsaved file.
 3. Run **devlog: Open Dashboard** from the Command Palette, or use the devlog sidebar or status bar.
 4. Open **Settings** in the dashboard to choose daily and weekly goals.
@@ -46,22 +46,22 @@ Unsaved files are supported; select their language in VS Code for accurate langu
 
 ### A closer look
 
-![Overview with daily and weekly time cards, activity chart, languages, and goals](media/screenshots/overview.png)
+![Overview with daily and weekly time cards, activity chart, languages, and goals](https://raw.githubusercontent.com/ardazeybek/devlog/main/media/screenshots/overview.png)
 
 _Overview brings your recent activity and goals together._
 
 <details>
 <summary>Explore projects, reports, and other screens</summary>
 
-![Projects showing coding time and project groups](media/screenshots/projects.png)
+![Projects showing coding time and project groups](https://raw.githubusercontent.com/ardazeybek/devlog/main/media/screenshots/projects.png)
 
 _Projects helps you compare work and organize related projects._
 
-![Reports showing period comparisons and export options](media/screenshots/reports.png)
+![Reports showing period comparisons and export options](https://raw.githubusercontent.com/ardazeybek/devlog/main/media/screenshots/reports.png)
 
 _Reports compares your activity and provides sharing and export tools._
 
-[Statistics](media/screenshots/statistics.png) · [Achievements](media/screenshots/achievements.png) · [Settings](media/screenshots/settings.png)
+[Statistics](https://raw.githubusercontent.com/ardazeybek/devlog/main/media/screenshots/statistics.png) · [Achievements](https://raw.githubusercontent.com/ardazeybek/devlog/main/media/screenshots/achievements.png) · [Settings](https://raw.githubusercontent.com/ardazeybek/devlog/main/media/screenshots/settings.png)
 
 </details>
 

@@ -2,7 +2,7 @@
   "name": "devlog-coding-activity",
   "displayName": "devlog — Coding Activity",
   "description": "Track your coding time and see your progress.",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "publisher": "ardazeybek",
   "engines": {
     "vscode": "^1.90.0"

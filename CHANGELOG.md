@@ -1,6 +1,10 @@
 # Changelog
 
-## Unreleased
+## 1.2.1
+
+- Updated the project guide with setup, contribution, support, and permission information.
+- Refreshed the dashboard GIF and all six screenshots with synthetic activity.
+- Updated the proprietary terms to require prior written permission for use.
 
 - Refined the color language: deep teal for the brand, amber when the daily goal is reached, and a stable color per project and language.
 - Showed how often the daily goal was reached in the last 30 days.

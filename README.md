@@ -27,9 +27,9 @@ Activity stays on your computer. There is no account, subscription, or external 
 
 ## Get started
 
-Use requires the owner's prior written permission; see [License](#license). Contact [Arda](mailto:quantastudio.dev@gmail.com) before installing, running, or modifying devlog.
+Devlog is free and open source under the [MIT license](LICENSE). You can install, use, modify, and share it without asking for permission.
 
-The extension is available on the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=ardazeybek.devlog-coding-activity). Authorized contributors can also [run from source](#run-from-source).
+The extension is available on the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=ardazeybek.devlog-coding-activity). You can also [run from source](#run-from-source).
 
 1. Install **devlog — Coding Activity** from the Marketplace in desktop VS Code.
 2. Edit a saved or unsaved file.
@@ -66,8 +66,6 @@ _Reports compares your activity and provides sharing and export tools._
 </details>
 
 ## Run from source
-
-These instructions are for the owner and contributors with written permission. They do not grant a license.
 
 You need **Node.js 20 or newer**, **Git**, and **desktop VS Code 1.90 or newer**.
 
@@ -108,19 +106,17 @@ I am learning HTML and plan to take on changes gradually so I can understand and
 
 Bug reports, feature ideas, documentation, translations, testing, design, and accessibility feedback are welcome through [Issues](https://github.com/ardazeybek/devlog/issues).
 
-For code changes, discuss your idea and obtain written permission first. Then create a branch, make a focused change, run the relevant checks, and open a pull request. See [CONTRIBUTING.md](CONTRIBUTING.md) for setup, review expectations, and contribution terms.
+For code changes, fork the repository, create a branch, make a focused change, run the relevant checks, and open a pull request. Discuss larger changes in an issue first. See [CONTRIBUTING.md](CONTRIBUTING.md) for setup, review expectations, and contribution terms.
 
 ## Support and contact
 
 - **Bugs and feature requests:** [GitHub Issues](https://github.com/ardazeybek/devlog/issues).
-- **Questions, collaboration, and permission requests:** [quantastudio.dev@gmail.com](mailto:quantastudio.dev@gmail.com).
+- **Questions and collaboration:** [quantastudio.dev@gmail.com](mailto:quantastudio.dev@gmail.com).
 - **Help with tracking or connecting:** [Support guide](SUPPORT.md).
 - **What is saved locally:** [Privacy note](PRIVACY.md).
 
 ## License
 
-**Copyright © 2026 Arda Zeybek. All rights reserved.**
+Devlog is open source under the [MIT license](LICENSE). You may use it for personal or commercial purposes, modify it, distribute it, and include it in your own projects. Keep the copyright and license notice with copies or substantial portions of the software.
 
-This is proprietary software, not an open-source project. Viewing the source does not grant permission to run, copy, modify, redistribute, sell, or use it in another project. Obtain prior written permission from the owner. See [LICENSE](LICENSE).
-
-GitHub's platform terms and rights required by applicable law still apply, including viewing and forking public repositories within GitHub. Third-party components retain their own licenses.
+Copyright © 2026 Arda Zeybek. Third-party components retain their own licenses.

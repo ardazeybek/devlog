@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.3
+
+- Released devlog as open source under the MIT license.
+- Removed written permission requirements from setup and contribution instructions.
+
 ## 1.2.2
 
 - Fixed the header contribution link on the Marketplace overview.

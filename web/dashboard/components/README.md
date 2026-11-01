@@ -4,6 +4,7 @@ Reusable markup builders.
 
 - `branches.js`: branch insight and project group tables.
 - `chart.js`: daily time line chart.
+- `empty.js`: empty-state block with a short next step.
 - `goal.js`: daily and weekly goal cards.
 - `heatmap.js`: last-year heatmap of day buttons.
 - `journal.js`: coding journal form and notes.

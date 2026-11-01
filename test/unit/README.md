@@ -8,3 +8,4 @@ Pure rule and storage tests.
 - `rewards.test.js`: reward claims.
 - `storage.test.js`: aggregation and damaged files.
 - `tracking-data.test.js`: sessions, branches, journal notes, aliases and groups.
+- `weekly-summary.test.js`: weekly summary text and when it is due.

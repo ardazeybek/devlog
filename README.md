@@ -10,6 +10,20 @@ devlog runs in VS Code and opens your stats in your browser. See how much time y
 
 _The screenshots and the overview GIF move through Overview, Achievements, Projects, and Reports. They use sample activity, not someone's personal coding history._
 
+## Screens
+
+| Overview                                                                                                                                                             | Statistics                                                                                                                                                        |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ![Overview page with today, last 7 days, streak, active time and languages](https://raw.githubusercontent.com/ardazeybek/devlog/main/media/screenshots/overview.png) | ![Statistics page with a daily chart, a 365-day heatmap and languages](https://raw.githubusercontent.com/ardazeybek/devlog/main/media/screenshots/statistics.png) |
+
+| Projects                                                                                                                                          | Reports                                                                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ![Projects page with a project table and project groups](https://raw.githubusercontent.com/ardazeybek/devlog/main/media/screenshots/projects.png) | ![Reports page with weekly and monthly summaries, sharing and exports](https://raw.githubusercontent.com/ardazeybek/devlog/main/media/screenshots/reports.png) |
+
+| Achievements                                                                                                                                   | Settings                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ![Achievements page with progress, XP and titles](https://raw.githubusercontent.com/ardazeybek/devlog/main/media/screenshots/achievements.png) | ![Settings page with daily and weekly goals, backup and restore](https://raw.githubusercontent.com/ardazeybek/devlog/main/media/screenshots/settings.png) |
+
 ## A little motivation to keep going
 
 Set a daily goal, build a streak, and earn achievements as you code. There are **229 achievements and 36 titles** to work toward. Titles need both XP and completed tasks, so collecting easy achievements alone won't unlock the higher ones.

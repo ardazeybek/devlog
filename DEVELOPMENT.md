@@ -1,43 +1,52 @@
 # Working on devlog
 
-devlog is a VS Code extension with a browser dashboard. The first version was written with AI. This guide is also a starting point for learning how the pieces work.
+devlog is a VS Code extension with a browser dashboard. Start with the [project map](docs/architecture/project-map.md), then read the [data flow](docs/architecture/data-flow.md). For a specific change, use the [change guide](docs/development/change-guide.md).
 
-## Files to start with
+All source code, identifiers, comments, filenames, UI text, and documentation must be in English.
 
-| File | What it does |
-| --- | --- |
-| `web/index.html` | The page header, navigation, and content container |
-| `web/app.js` | Builds the cards, charts, achievements, and settings screens |
-| `web/style.css` | The glass panels, layout, colors, and responsive styles |
-| `web/motion.js` | Animates the charts, cards, and counters |
-| `web/achievements.js` | Calculates achievements, XP, and title requirements |
-| `web/languages.js` | Language names and symbols |
-| `extension.js` | Watches editor activity and serves the local dashboard |
-| `core.js` | Checks edits, file exclusions, and language detection |
-| `storage.js` | Saves and combines activity records |
+## Run locally
 
-Some HTML is written as template strings in `web/app.js`, so a change to a card may start there rather than in `index.html`.
+Use Node.js 20 or newer and desktop VS Code 1.90 or newer. Open this repository in VS Code and press **F5**. Edit a saved or unsaved file in the Extension Development Host, then run **devlog: Open Dashboard**. Keep development data separate from your normal VS Code profile.
 
-## Run it locally
-
-Use desktop VS Code 1.90 or newer. Open this folder and press F5. A separate Extension Development Host window opens with devlog loaded. Edit a file in that window, then use **devlog: Open Dashboard**.
-
-The dashboard server starts only when you open it. It listens on `127.0.0.1` and protects the data API with a random token. Keep development data separate from your normal VS Code profile.
+`package.json` points VS Code to `src/extension/index.js`. There is no compilation or bundling step. Node loads the extension with CommonJS; the browser loads dashboard files with native ES modules. Two shared modules also expose browser globals so exactly the same reward and language rules run in both environments.
 
 ## Run checks
-
-With Node.js 20 or newer installed:
 
 ```sh
 npm test
 ```
 
-No dependency install is needed for the tests. They cover edit counting, unsaved documents, idle behavior, storage, access checks, scroll position, achievements, and title requirements. GitHub Actions runs them on Windows, macOS, and Linux.
+Tests use Node's built-in test runner and require no dependency installation. They cover tracking, storage, HTTP access checks, the browser asset graph, dashboard refresh, achievements, and titles. The dashboard test uses Node's experimental VM module API to load the real ES module graph in an isolated DOM fixture; the extension itself does not require experimental flags.
+
+For consistent formatting:
+
+```sh
+npm ci
+npm run format:check
+npm run format
+```
+
+Prettier is a development dependency only. There are no runtime dependencies. `.editorconfig` defines whitespace defaults, and `.prettierrc.json` defines formatting. HTML template literals use `/* HTML */` so their markup is formatted too.
 
 ## Make a package
 
-Install Microsoft's `@vscode/vsce` tool, then run `vsce package`. The package allowlist excludes tests, development guides, recordings, and GitHub configuration. Runtime files, the icon, and user-facing documents are included.
+With Microsoft's `@vscode/vsce` installed:
 
-## Learning plan
+```sh
+vsce ls --no-dependencies
+vsce package --no-dependencies
+```
 
-Arda is starting with HTML. The plan is to understand the page structure and templates, take on small fixes, then learn the CSS and JavaScript needed to work on more of the app. This is a plan, not a claim that every part is already understood.
+The package allowlist in `.vscodeignore` includes `src/`, `web/`, the extension icons, and user-facing documents. Tests, development tools, architecture guides, and recordings are excluded. `src/extension/dashboard/assets.js` is a separate HTTP allowlist: packaged extension files must never automatically become public URLs.
+
+## Suggested reading order
+
+1. `web/index.html`: page shell, navigation, script and stylesheet order.
+2. `web/dashboard/app.js`: fetching snapshots and handling navigation.
+3. `web/dashboard/render.js`: rendering lifecycle and scroll preservation.
+4. `web/dashboard/pages/` and `components/`: HTML templates and page behavior.
+5. `src/extension/index.js`: how the extension services are connected.
+6. `src/extension/tracking/` and `storage/`: how edits become saved time.
+7. `src/shared/achievements.js` and `src/extension/rewards/`: reward rules and notification claims.
+
+The first version was written with AI. This structure and its guides are intended to help a new contributor learn the actual implementation and make focused changes.

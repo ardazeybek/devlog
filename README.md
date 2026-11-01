@@ -6,15 +6,21 @@ devlog runs in VS Code and opens your stats in your browser. See how much time y
 
 [Install from the VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=ardazeybek.devlog-coding-activity) · [Report a bug](https://github.com/ardazeybek/devlog/issues) · [Get in touch](mailto:quantastudio.dev@gmail.com)
 
-![devlog overview: coding time, streaks, languages, and a daily goal](https://raw.githubusercontent.com/ardazeybek/devlog/main/media/overview.gif)
+![devlog overview: today's time, weekly total, coding streak, and time by language](https://raw.githubusercontent.com/ardazeybek/devlog/main/media/overview.gif)
 
-*The images use sample activity, not someone's personal coding history.*
+_The screenshots and the overview GIF move through Overview, Achievements, Projects, and Reports. They use sample activity, not someone's personal coding history._
 
 ## A little motivation to keep going
 
 Set a daily goal, build a streak, and earn achievements as you code. There are **229 achievements and 36 titles** to work toward. Titles need both XP and completed tasks, so collecting easy achievements alone won't unlock the higher ones.
 
 ![229 achievements and 36 titles in devlog](https://raw.githubusercontent.com/ardazeybek/devlog/main/media/achievements.png)
+
+## Reports, notes, and projects
+
+The **Reports** page compares your week and month with the same days before, and points out your main project and language. Share a card with your weekly total (project names can stay hidden), or export CSV or a backup JSON file. Print or save a PDF from the same page.
+
+Add a short journal note to remember what you worked on. In **Projects**, group related projects together and see how each one is split across branches.
 
 ## Get started
 
@@ -55,6 +61,6 @@ devlog uses JavaScript, HTML, and CSS. There are no runtime dependencies.
 
 - Use Node.js 20 or newer and run `npm test`.
 - Open the folder in VS Code and press **F5** to try the extension in a separate window.
-- See [Development](DEVELOPMENT.md) for how tracking, storage, and the dashboard fit together.
+- Start with [Development](DEVELOPMENT.md), the [project map](docs/architecture/project-map.md), and the [data flow](docs/architecture/data-flow.md).
 
 Free to use under the [MIT license](LICENSE). Read the [privacy note](PRIVACY.md) for details about saved data.

@@ -1,0 +1,38 @@
+/* Connection problems appear beside the brand; healthy sessions stay quiet. */
+[hidden] {
+  display: none !important;
+}
+header {
+  flex-wrap: wrap;
+  gap: 14px;
+}
+.notice {
+  color: #a42332 !important;
+  font-size: 12px;
+  line-height: 1.5;
+  max-width: 320px;
+  font-weight: 650;
+}
+.notice:before {
+  display: none !important;
+}
+header nav {
+  margin-left: auto;
+}
+.row strong {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.language-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 28px;
+  font-size: 11px;
+  font-weight: 800;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--language-color) 12%, transparent);
+  color: var(--language-color);
+}

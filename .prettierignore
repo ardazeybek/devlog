@@ -1,0 +1,5 @@
+node_modules/
+*.vsix
+media/
+work/
+package-lock.json

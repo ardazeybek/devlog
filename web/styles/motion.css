@@ -1,0 +1,225 @@
+/* Liquid motion: transform/opacity effects do not move document layout. */
+@property --progress {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 0%;
+}
+button {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.tap-ink {
+  position: absolute;
+  border-radius: 50%;
+  background: currentColor;
+  pointer-events: none;
+  z-index: -1;
+}
+.bar i {
+  transform-origin: left center;
+}
+.chart polyline {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.motion-on nav button {
+  transition:
+    background 0.28s,
+    box-shadow 0.28s,
+    color 0.28s,
+    transform 0.28s;
+}
+.motion-on nav button:hover svg {
+  transform: translateY(-1px) scale(1.1);
+}
+.motion-on nav svg {
+  transition: transform 0.3s;
+}
+.motion-on .logo > svg {
+  transition:
+    transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.5s;
+}
+.motion-on .logo:hover > svg {
+  transform: rotate(-8deg) scale(1.08);
+  box-shadow: 0 6px 18px #19795342;
+}
+.motion-on .card,
+.motion-on .metric,
+.motion-on .award,
+.motion-on .title-card {
+  transition:
+    transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.35s,
+    border-color 0.35s;
+}
+.card,
+.award,
+.title-card {
+  position: relative;
+}
+.card:after,
+.award:after,
+.title-card:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    220px circle at var(--light-x, 50%) var(--light-y, 0%),
+    #ffffff70,
+    transparent 75%
+  );
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s;
+}
+.motion-on .card:hover:after,
+.motion-on .award:hover:after,
+.motion-on .title-card:hover:after {
+  opacity: 1;
+}
+.motion-on .award:hover,
+.motion-on .title-card:hover {
+  transform: translateY(-3px);
+  border-color: #fff;
+  box-shadow:
+    0 10px 22px #335d4210,
+    inset 0 1px 0 white;
+}
+.motion-on .metric:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 14px 30px #365e4819,
+    inset 0 1px 0 #fff8;
+}
+.motion-on .award-icon {
+  transition:
+    transform 0.4s,
+    box-shadow 0.4s;
+}
+.motion-on .earned:hover .award-icon {
+  transform: rotate(-9deg) scale(1.12);
+  box-shadow: 0 3px 15px #62be8c3d;
+}
+.motion-on .ambient i {
+  animation: ambient-float 24s ease-in-out infinite alternate;
+  will-change: transform;
+}
+.motion-on .ambient i:nth-child(2) {
+  animation-duration: 29s;
+  animation-delay: -10s;
+}
+.motion-on .ambient i:nth-child(3) {
+  animation-duration: 32s;
+  animation-delay: -17s;
+}
+.motion-on .notice:before {
+  animation: live-breathe 3.6s ease-in-out infinite;
+}
+.motion-on .flame.lit {
+  transform-origin: 50% 90%;
+  animation: flame-sway 2.9s ease-in-out infinite;
+}
+.motion-on .flame.lit:nth-child(2n) {
+  animation-delay: -1.3s;
+  animation-duration: 3.3s;
+}
+.motion-on .flame.lit:nth-child(3n) {
+  animation-delay: -0.7s;
+  animation-duration: 2.6s;
+}
+.motion-on .flame-inner {
+  animation: flame-glow 2.8s ease-in-out infinite;
+}
+.motion-on .goal-ring {
+  transition: box-shadow 0.4s;
+}
+.motion-on .goal-ring:hover {
+  box-shadow:
+    0 6px 30px #38886325,
+    inset 0 1px 3px white;
+}
+.motion-on .table tbody tr {
+  transition: background 0.25s;
+}
+.motion-on input,
+.motion-on select {
+  transition:
+    border-color 0.25s,
+    box-shadow 0.25s,
+    background 0.25s;
+}
+.motion-on input:focus {
+  border-color: #76b999;
+  background: #ffffffe0;
+  box-shadow: 0 0 0 4px #54b38c15;
+}
+.motion-on .primary {
+  transition:
+    transform 0.25s,
+    box-shadow 0.25s,
+    filter 0.25s;
+}
+.motion-on .primary:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 18px #1762412b,
+    inset 0 1px 0 #a7eac175;
+}
+.motion-on .primary:active {
+  transform: scale(0.97);
+}
+.motion-paused *,
+.motion-paused *:before,
+.motion-paused *:after {
+  animation-play-state: paused !important;
+}
+@keyframes ambient-float {
+  from {
+    transform: translate3d(-10px, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(25px, -20px, 0) scale(1.08);
+  }
+}
+@keyframes live-breathe {
+  0%,
+  100% {
+    box-shadow: 0 0 0 3px #56b08e1a;
+  }
+  50% {
+    box-shadow: 0 0 0 5px #56b08e06;
+  }
+}
+@keyframes flame-sway {
+  0%,
+  100% {
+    transform: rotate(-2deg) scaleY(1);
+  }
+  50% {
+    transform: rotate(2deg) scaleY(1.05);
+  }
+}
+@keyframes flame-glow {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.75;
+  }
+}
+@media (hover: none) {
+  .motion-on .award:hover,
+  .motion-on .title-card:hover,
+  .motion-on .metric:hover {
+    transform: none;
+  }
+  .card:after,
+  .award:after,
+  .title-card:after {
+    display: none;
+  }
+}

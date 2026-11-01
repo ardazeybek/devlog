@@ -1,0 +1,241 @@
+/* Liquid glassmorphism: translucent layered surfaces with refractive edge light. */
+:root {
+  --glass: linear-gradient(125deg, #ffffff70 0%, #ffffff26 48%, #ffffff48 100%);
+  --edge: 1px solid #ffffffb8;
+  --shadow:
+    inset 0 1.5px 0 #fffffff0, inset 1px 0 0 #ffffff80,
+    inset 0 -1px 0 #ffffff55, 0 12px 32px #315b4812;
+  background: #cbded5;
+  color: #173b2c;
+  --muted: #4c6d5b;
+}
+.ambient {
+  background:
+    radial-gradient(ellipse at 12% 17%, #a1d8bd 0%, transparent 46%),
+    radial-gradient(ellipse at 93% 38%, #bdc5e4 0%, transparent 48%),
+    radial-gradient(ellipse at 50% 95%, #ece3c5 0%, transparent 50%),
+    linear-gradient(140deg, #e0eae3, #cadfd6 58%, #d9e0e5);
+}
+.ambient i {
+  opacity: 0.88;
+  filter: blur(32px);
+}
+.ambient i:nth-child(1) {
+  background: radial-gradient(circle, #76c7a4, transparent 68%);
+  left: -12%;
+  top: 8%;
+}
+.ambient i:nth-child(2) {
+  background: radial-gradient(circle, #a6abd9, transparent 68%);
+  right: -11%;
+  top: 18%;
+}
+.ambient i:nth-child(3) {
+  background: radial-gradient(circle, #f3e0b3, transparent 68%);
+  bottom: -20%;
+  left: 25%;
+}
+.app-shell {
+  background: linear-gradient(135deg, #ffffff30, #ffffff0d 55%, #ffffff24);
+  border: 1px solid #ffffff9c;
+  box-shadow:
+    inset 0 2px 0 #ffffffc9,
+    inset 1px 0 0 #ffffff70,
+    inset 0 -1px 0 #ffffff50,
+    0 26px 80px #204c381c;
+  backdrop-filter: blur(14px) saturate(125%);
+  -webkit-backdrop-filter: blur(14px) saturate(125%);
+}
+header {
+  background: linear-gradient(130deg, #ffffff9c, #ffffff3b 55%, #ffffff70);
+  backdrop-filter: blur(26px) saturate(165%);
+  -webkit-backdrop-filter: blur(26px) saturate(165%);
+  box-shadow:
+    inset 0 2px 0 #fff,
+    inset 0 -1px 0 #ffffff75,
+    0 8px 25px #315b4810;
+}
+nav {
+  background: linear-gradient(135deg, #b4c9bd25, #ffffff12);
+  border: 1px solid #ffffff7d;
+  box-shadow:
+    inset 0 1px 4px #375c4520,
+    inset 0 -1px 0 #ffffff80;
+}
+nav button.selected {
+  background: linear-gradient(145deg, #ffffffe6, #ffffff80);
+  box-shadow:
+    inset 0 1.5px 0 #fff,
+    inset 0 -1px 0 #ffffff75,
+    0 4px 10px #315b4819;
+}
+.card,
+.metric {
+  background: var(--glass);
+  backdrop-filter: blur(28px) saturate(160%);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+  box-shadow: var(--shadow);
+  border: var(--edge);
+}
+.card:before,
+.metric:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: linear-gradient(
+    128deg,
+    #ffffff40 0%,
+    transparent 34%,
+    transparent 62%,
+    #ffffff20 100%
+  );
+  box-shadow: inset 0 0 0 1px #ffffff20;
+  z-index: -1;
+}
+.metric-today {
+  background:
+    radial-gradient(ellipse at 95% 0, #9be7c17a, transparent 68%),
+    linear-gradient(125deg, #278361d9, #0d7258c7);
+  border: 1px solid #c3f4dc9c;
+  box-shadow:
+    inset 0 2px 0 #d0ffe9a3,
+    inset 0 -1px 0 #b8efd057,
+    0 12px 30px #14634725;
+}
+.metric-today:before {
+  background: linear-gradient(130deg, #d3ffea30, transparent 55%);
+}
+.metric-label,
+.row span,
+.chart text {
+  color: #456d56;
+  fill: #456d56;
+}
+.metric-today .metric-label {
+  color: #f1fff7;
+}
+.metric-icon {
+  background: linear-gradient(135deg, #ffffff85, #ffffff23);
+  border: 1px solid #ffffff70;
+  box-shadow:
+    inset 0 1px 0 #ffffffe0,
+    0 3px 7px #39664b08;
+}
+.award,
+.title-card {
+  background: linear-gradient(135deg, #ffffff65, #ffffff20);
+  border-color: #ffffffa8;
+  backdrop-filter: blur(12px) saturate(135%);
+  -webkit-backdrop-filter: blur(12px) saturate(135%);
+  box-shadow:
+    inset 0 1.5px 0 #ffffffe0,
+    inset 0 -1px 0 #ffffff40,
+    0 4px 14px #315b4808;
+}
+.award.earned,
+.title-card.earned {
+  background: linear-gradient(135deg, #dcf5e583, #ffffff29);
+  border-color: #a2d6b999;
+}
+.award-icon {
+  background: linear-gradient(145deg, #ffffffc9, #def2e573);
+  box-shadow:
+    inset 0 1.5px 0 #fff,
+    0 4px 12px #315b4810;
+}
+select,
+.award-tools input,
+.goal-inputs input {
+  background: linear-gradient(135deg, #ffffff80, #ffffff35);
+  border: 1px solid #ffffffb8;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow:
+    inset 0 1.5px 0 #fff,
+    inset 0 -1px 0 #ffffff45,
+    0 4px 12px #315b4809;
+}
+select option {
+  background: #edf5ef;
+  color: #173b2c;
+}
+.bar {
+  background: #406b5414;
+  box-shadow:
+    inset 0 1px 3px #214d3820,
+    inset 0 -1px 0 #ffffff70;
+}
+.bar i {
+  background: linear-gradient(90deg, #228b69e8, #80cfaae0);
+  box-shadow:
+    inset 0 1px 0 #dbffe2b3,
+    0 0 8px #52a27d20;
+}
+.goal-ring {
+  background: conic-gradient(from 0deg, #258d6cde var(--progress), #d1e6d663 0);
+  box-shadow:
+    inset 0 2px 3px #ffffffb3,
+    0 6px 22px #2d68431a;
+}
+.goal-ring > div {
+  background: linear-gradient(140deg, #edf9f1ab, #e2f1e961);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow:
+    inset 0 1.5px 0 #fff,
+    inset 0 -1px 0 #ffffff80;
+}
+.card:after,
+.award:after,
+.title-card:after {
+  background: radial-gradient(
+    250px circle at var(--light-x, 50%) var(--light-y, 0%),
+    #ffffff65,
+    transparent 75%
+  );
+}
+.motion-on .card:hover {
+  border-color: #ffffffed;
+  box-shadow:
+    inset 0 2px 0 white,
+    inset 0 -1px 0 #ffffff70,
+    0 15px 35px #315b481a;
+}
+@supports not (backdrop-filter: blur(1px)) {
+  .app-shell,
+  header,
+  .card,
+  .metric,
+  .award,
+  .title-card {
+    background-color: #e7f1e9;
+  }
+  .metric-today {
+    background-color: #187654;
+  }
+}
+@media (prefers-contrast: more) {
+  .app-shell,
+  header,
+  .card,
+  .metric,
+  .award,
+  .title-card {
+    background: #f3f8f4;
+    border-color: #658b73;
+    backdrop-filter: none;
+  }
+  .metric-today {
+    background: #17694c;
+    color: white;
+  }
+  .card:before,
+  .metric:before,
+  .card:after,
+  .award:after,
+  .title-card:after {
+    display: none;
+  }
+}

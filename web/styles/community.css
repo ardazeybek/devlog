@@ -1,0 +1,19 @@
+.community-card {
+  margin-top: 20px;
+}
+.community-card p {
+  font-size: 13px;
+  line-height: 1.7;
+}
+.community-links {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+.community-links a {
+  color: #147652;
+  font-size: 13px;
+  text-underline-offset: 4px;
+  font-weight: 650;
+}

@@ -1,0 +1,236 @@
+/* Quiet original palette, sculpted glass depth. */
+:root {
+  background: #e6eeea;
+  color: #233b33;
+  --muted: #61776d;
+  --accent: #137e5b;
+  --glass: linear-gradient(135deg, #ffffffb3 0%, #ffffff70 55%, #ffffff8c 100%);
+  --edge: 1px solid #ffffffdb;
+  --shadow:
+    inset 0 2px 0 #fffffffa, inset 2px 0 0 #ffffff99,
+    inset -1px -2px 0 #bed0c477, 0 3px 0 #b7c8bd66, 0 9px 15px #304f3c0d,
+    0 20px 35px #304f3c12;
+}
+.ambient {
+  background:
+    radial-gradient(ellipse at 80% 5%, #d4e5dc, transparent 58%),
+    linear-gradient(130deg, #edf2ee, #e2e9ec 65%, #e0e8df);
+}
+.ambient i {
+  opacity: 0.65;
+  filter: blur(45px);
+}
+.ambient i:nth-child(1) {
+  background: radial-gradient(circle, #a5d9c2, transparent 70%);
+  top: 5%;
+  left: -15%;
+}
+.ambient i:nth-child(2) {
+  background: radial-gradient(circle, #c7c5e4, transparent 70%);
+  right: -15%;
+  top: 22%;
+}
+.ambient i:nth-child(3) {
+  background: radial-gradient(circle, #f1e9ce, transparent 70%);
+  bottom: -25%;
+  left: 20%;
+}
+.app-shell {
+  background: linear-gradient(145deg, #ffffff52, #f1f6f140);
+  box-shadow:
+    inset 0 2px 0 #ffffffed,
+    inset 1px 0 0 #fff9,
+    inset 0 -2px 0 #bccfc570,
+    0 5px 0 #c2d1c580,
+    0 30px 90px #28473912;
+}
+header {
+  background: linear-gradient(120deg, #ffffffe0, #ffffff6b);
+  box-shadow:
+    inset 0 2px 0 #fff,
+    inset 1px 0 0 #fffc,
+    inset 0 -2px 0 #bfcec573,
+    0 3px 0 #bfcec54d,
+    0 9px 22px #365e4810;
+}
+nav {
+  background: #dce5df70;
+  box-shadow:
+    inset 0 2px 4px #476a5318,
+    inset 0 -1px 0 #ffffffd9;
+}
+nav button.selected {
+  background: linear-gradient(150deg, #fff, #ffffffa6);
+  box-shadow:
+    inset 0 2px 0 #fff,
+    inset 0 -1px 0 #b4c9bb70,
+    0 2px 0 #c5d1c95c,
+    0 4px 8px #2e553919;
+}
+.card,
+.metric {
+  background: var(--glass);
+  box-shadow: var(--shadow);
+  border: var(--edge);
+}
+.card:before,
+.metric:before {
+  z-index: 0;
+  background: linear-gradient(
+    118deg,
+    #ffffff35 0%,
+    transparent 36%,
+    transparent 64%,
+    #acbfb017 100%
+  );
+  box-shadow: inset 0 0 0 1px #ffffff3d;
+  pointer-events: none;
+}
+.card > * {
+  position: relative;
+}
+.metric > * {
+  position: relative;
+}
+.metric-today {
+  background:
+    radial-gradient(ellipse at 95% 0, #92dab780, transparent 65%),
+    linear-gradient(120deg, #237654ed, #0a674cfa);
+  border-color: #8fcbacb3;
+  box-shadow:
+    inset 0 2px 0 #c9f9de99,
+    inset 1px 0 0 #c0efd270,
+    inset 0 -2px 0 #064d3870,
+    0 3px 0 #14674b60,
+    0 14px 28px #14634726;
+}
+.metric-label,
+.row span {
+  color: #577466;
+}
+.chart text {
+  fill: #627d6d;
+}
+.metric-today .metric-label {
+  color: #e3f5eb;
+}
+.metric-icon {
+  background: #ffffff60;
+  box-shadow:
+    inset 0 2px 0 #ffffffe0,
+    inset 0 -1px 0 #b8cbbd60,
+    0 3px 5px #31523b0c;
+}
+.metric-today .metric-icon {
+  background: #ffffff18;
+  box-shadow: inset 0 1px 0 #ffffff4d;
+  color: white;
+}
+.award,
+.title-card {
+  background: linear-gradient(145deg, #ffffffa1, #ffffff42);
+  border-color: #ffffffdc;
+  box-shadow:
+    inset 0 2px 0 #fff,
+    inset 1px 0 0 #ffffff80,
+    inset 0 -1.5px 0 #c0d0c770,
+    0 2px 0 #c6d5cb50,
+    0 7px 16px #315b480a;
+}
+.award.earned,
+.title-card.earned {
+  background: linear-gradient(140deg, #dcf0e5b0, #ffffff4d);
+  border-color: #a9d8bf9e;
+}
+.award-icon {
+  box-shadow:
+    inset 0 2px 0 white,
+    inset 0 -1px 0 #bbd4c67a,
+    0 3px 0 #c5d9cb50,
+    0 5px 8px #325e3f0c;
+}
+select,
+.award-tools input,
+.goal-inputs input {
+  background: linear-gradient(145deg, #ffffffa1, #ffffff59);
+  box-shadow:
+    inset 0 2px 4px #3e685515,
+    inset 0 -1px 0 white,
+    0 1px 0 #ffffffa1;
+}
+.bar {
+  background: #46715d0d;
+  box-shadow:
+    inset 0 2px 3px #32543d17,
+    inset 0 -1px 0 #ffffffd9;
+}
+.bar i {
+  background: linear-gradient(90deg, #2a9674, #70bf99);
+  box-shadow:
+    inset 0 1px 0 #ffffff80,
+    inset 0 -1px 0 #17684b30;
+}
+.goal-ring {
+  box-shadow:
+    inset 0 2px 3px #fff,
+    inset 0 -2px 3px #3c715826,
+    0 4px 0 #c4d5c960,
+    0 9px 20px #356d4914;
+}
+.goal-ring > div {
+  background: linear-gradient(145deg, #f2f8f3, #e7f0eb);
+  box-shadow:
+    inset 0 2px 0 #fff,
+    inset 0 -2px 0 #c5d6cb75,
+    0 2px 4px #356d4910;
+}
+@media (hover: hover) {
+  .motion-on .card:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      inset 0 2px 0 white,
+      inset 2px 0 0 #ffffffb3,
+      inset 0 -2px 0 #bed0c470,
+      0 4px 0 #b7c8bd4d,
+      0 22px 40px #304f3c1a;
+  }
+  .motion-on .metric:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow);
+  }
+  .motion-on .metric-today:hover {
+    box-shadow:
+      inset 0 2px 0 #c9f9de99,
+      inset 0 -2px 0 #064d3870,
+      0 4px 0 #14674b60,
+      0 20px 35px #14634730;
+  }
+  .motion-on .award:hover,
+  .motion-on .title-card:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      inset 0 2px 0 white,
+      inset 0 -2px 0 #bed0c470,
+      0 3px 0 #c5d5ca66,
+      0 14px 24px #304f3c18;
+  }
+}
+@media (prefers-contrast: more) {
+  .card,
+  .metric,
+  .award,
+  .title-card,
+  header {
+    background: #f3f8f4;
+    border-color: #658b73;
+    box-shadow: none;
+  }
+  .metric-today {
+    background: #17694c;
+    color: white;
+  }
+  .card:before,
+  .metric:before {
+    display: none;
+  }
+}

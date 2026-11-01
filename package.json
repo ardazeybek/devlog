@@ -1,0 +1,172 @@
+{
+  "name": "devlog-coding-activity",
+  "displayName": "devlog — Coding Activity",
+  "description": "Track your coding time and see your progress.",
+  "version": "1.2.0",
+  "publisher": "ardazeybek",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./src/extension/index.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "devlog.open",
+        "title": "devlog: Open Dashboard",
+        "icon": "$(link-external)"
+      },
+      {
+        "command": "devlog.pause",
+        "title": "devlog: Pause / Resume Tracking"
+      }
+    ],
+    "configuration": {
+      "title": "devlog",
+      "properties": {
+        "devlog.dailyGoalMinutes": {
+          "type": "integer",
+          "default": 120,
+          "minimum": 15,
+          "maximum": 720,
+          "description": "Daily active coding goal in minutes."
+        },
+        "devlog.weeklyGoalMinutes": {
+          "type": "integer",
+          "default": 600,
+          "minimum": 60,
+          "maximum": 10080,
+          "description": "Weekly active coding goal in minutes."
+        },
+        "devlog.excludedPaths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "node_modules",
+            "dist",
+            "build",
+            "vendor",
+            ".git",
+            "generated"
+          ],
+          "description": "Folder names excluded from activity tracking."
+        },
+        "devlog.idleTimeoutSeconds": {
+          "type": "integer",
+          "default": 60,
+          "minimum": 15,
+          "maximum": 600,
+          "description": "Seconds without edits before devlog stops counting active time."
+        },
+        "devlog.excludedProjects": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "description": "Project names that devlog never tracks."
+        },
+        "devlog.projectGroups": {
+          "type": "object",
+          "default": {},
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "description": "Groups of project names, for example {\"Learning\": [\"course-app\"]}."
+        },
+        "devlog.projectAliases": {
+          "type": "object",
+          "default": {},
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Renamed projects, mapping an old name to its current name."
+        },
+        "devlog.weeklySummaryNotification": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show last week's summary in VS Code on Sunday evenings."
+        }
+      }
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "devlog",
+          "title": "devlog",
+          "icon": "media/devlog.svg"
+        }
+      ]
+    },
+    "views": {
+      "devlog": [
+        {
+          "id": "devlog.launcher",
+          "name": "Coding Activity"
+        }
+      ]
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "devlog.open",
+          "when": "view == devlog.launcher",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "license": "SEE LICENSE IN LICENSE",
+  "icon": "media/icon.png",
+  "extensionKind": [
+    "ui"
+  ],
+  "keywords": [
+    "coding",
+    "activity",
+    "time tracker",
+    "productivity",
+    "dashboard"
+  ],
+  "scripts": {
+    "test": "node scripts/test.js",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true,
+      "description": "devlog counts local editor activity without executing workspace code."
+    },
+    "virtualWorkspaces": {
+      "supported": false,
+      "description": "devlog supports local files and unsaved documents."
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ardazeybek/devlog.git"
+  },
+  "homepage": "https://github.com/ardazeybek/devlog#readme",
+  "bugs": {
+    "url": "https://github.com/ardazeybek/devlog/issues",
+    "email": "quantastudio.dev@gmail.com"
+  },
+  "galleryBanner": {
+    "color": "#e5efea",
+    "theme": "light"
+  },
+  "devDependencies": {
+    "prettier": "3.9.10"
+  }
+}

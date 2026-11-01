@@ -1,0 +1,225 @@
+@media (min-width: 1450px) {
+  main {
+    padding: 34px 44px;
+  }
+  .card {
+    padding: 28px;
+  }
+  .metric b {
+    font-size: 39px;
+  }
+}
+@media (max-width: 1050px) {
+  body {
+    padding: 15px;
+  }
+  .app-shell {
+    border-radius: 28px;
+  }
+  header {
+    gap: 15px;
+    padding: 12px 15px;
+  }
+  nav button {
+    padding: 11px 12px;
+    font-size: 12px;
+  }
+  nav svg {
+    display: none;
+  }
+  main {
+    padding: 24px;
+  }
+  .grid {
+    grid-template-columns: minmax(0, 1.7fr) minmax(240px, 1fr);
+  }
+  .card {
+    padding: 22px;
+  }
+  .metric b {
+    font-size: 28px;
+  }
+  .metric {
+    padding: 18px;
+  }
+  .badges {
+    grid-template-columns: 1fr;
+  }
+  .badges .award {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 15px;
+  }
+  .badges .award-top {
+    grid-column: 1/-1;
+  }
+  .badges .award p {
+    margin: 0 0 8px;
+  }
+  .badges .award .bar {
+    grid-column: 1/-1;
+  }
+  .badges .award-bottom {
+    grid-column: 1/-1;
+  }
+  .award-catalog {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 720px) {
+  body {
+    padding: 9px;
+  }
+  .app-shell {
+    border-radius: 24px;
+    min-height: calc(100vh - 18px);
+  }
+  header {
+    flex-direction: column;
+    align-items: stretch;
+    margin: 9px;
+    padding: 14px;
+    border-radius: 19px;
+    gap: 16px;
+  }
+  .logo {
+    font-size: 24px;
+    align-self: center;
+  }
+  nav {
+    justify-content: center;
+    gap: 1px;
+    padding: 4px;
+  }
+  nav button {
+    padding: 10px 9px;
+    font-size: 10px;
+  }
+  main {
+    padding: 20px 15px;
+  }
+  .heading {
+    margin-bottom: 20px;
+  }
+  h1 {
+    font-size: 27px;
+  }
+  .notice {
+    font-size: 10px;
+  }
+  select {
+    padding: 10px;
+    font-size: 11px;
+    border-radius: 13px;
+  }
+  .metrics {
+    gap: 10px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .metric {
+    padding: 16px;
+    min-height: 135px;
+    border-radius: 20px;
+  }
+  .metric-streak {
+    grid-column: 1/-1;
+    min-height: 130px;
+  }
+  .metric-streak .streak-flames {
+    position: absolute;
+    right: 18px;
+    bottom: 27px;
+    gap: 4px;
+  }
+  .metric-streak b {
+    margin: 2px 0;
+  }
+  .metric b {
+    font-size: 27px;
+  }
+  .metric-label {
+    font-size: 11px;
+  }
+  .metric-icon {
+    width: 27px;
+    height: 27px;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .card {
+    padding: 22px;
+    border-radius: 22px;
+  }
+  .chart text {
+    font-size: 12px;
+  }
+  .badges {
+    grid-template-columns: 1fr;
+  }
+  .badges .award {
+    display: flex;
+  }
+  .badges .award p {
+    margin: 10px 0 18px;
+  }
+  .award-catalog {
+    grid-template-columns: 1fr;
+  }
+  .award-tools {
+    flex-wrap: wrap;
+    gap: 9px;
+  }
+  .award-tools input {
+    flex-basis: 100%;
+  }
+  .award-tools select {
+    flex: 1;
+  }
+  .goal-card {
+    padding-bottom: 25px;
+  }
+  .table td,
+  .table th {
+    padding: 15px 6px;
+    font-size: 11px;
+  }
+  .settings-card {
+    max-width: none;
+  }
+  .goal-inputs input {
+    width: 120px;
+  }
+  .streak-flames .flame {
+    width: 16px;
+    height: 21px;
+  }
+}
+@supports not (backdrop-filter: blur(1px)) {
+  .card,
+  .metric,
+  header,
+  .app-shell {
+    background-color: #eff5f0;
+  }
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --muted: #314f3e;
+  }
+  .card,
+  .metric,
+  header {
+    background-color: #f5faf6;
+    border-color: #6e937c;
+  }
+  .notice,
+  .chart text,
+  .award-bottom,
+  .pill {
+    color: #314f3e;
+    fill: #314f3e;
+  }
+}

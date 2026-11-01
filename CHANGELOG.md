@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.2
+
+- Fixed the header contribution link on the Marketplace overview.
+
 ## 1.2.1
 
 - Updated the project guide with setup, contribution, support, and permission information.

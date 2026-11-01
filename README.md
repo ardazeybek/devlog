@@ -3,7 +3,7 @@
   <h1>devlog</h1>
   <p><strong>See where your coding time goes, right from VS Code.</strong></p>
   <p>A local activity tracker with a browser dashboard for your time, projects, languages, and goals.</p>
-  <p><a href="#get-started">Get started</a> · <a href="#run-from-source">Setup</a> · <a href="CONTRIBUTING.md">Contribute</a> · <a href="mailto:quantastudio.dev@gmail.com">Contact</a></p>
+  <p><a href="#get-started">Get started</a> · <a href="#run-from-source">Setup</a> · <a href="https://github.com/ardazeybek/devlog/blob/main/CONTRIBUTING.md">Contribute</a> · <a href="mailto:quantastudio.dev@gmail.com">Contact</a></p>
 </div>
 
 ![The devlog Overview page opening with animated time cards and activity charts](https://raw.githubusercontent.com/ardazeybek/devlog/main/media/overview.gif)

@@ -1,20 +1,25 @@
+// Summary metric cards for the selected range, today and the coding streak.
 import { duration, streak, flame } from "../helpers.js";
 
-export function metricsCard({ today, n, total, ds }) {
+// Builds the three top-level metric cards for the selected range.
+export function metricsCard({ today, label, total, ds, goalPercent = 0 }) {
+  const activeDays = ds.filter((d) => d.seconds >= 900).length;
   const metrics = /* HTML */ `<section class="metrics">
     <div class="metric metric-today">
       <span class="metric-label">Today<span class="metric-icon">◷</span></span
       ><b data-count="${today.seconds || 0}" data-format="duration"
         >${duration(today.seconds)}</b
       >
+      <div class="today-progress" aria-label="${goalPercent}% of daily goal">
+        <i style="width:${goalPercent}%"></i>
+      </div>
     </div>
     <div class="metric">
       <span class="metric-label"
-        >Last ${n} days<span class="metric-icon">↗</span></span
+        >${label}<span class="metric-icon">↗</span></span
       ><b data-count="${total}" data-format="duration">${duration(total)}</b
       ><span class="muted"
-        >${ds.filter((d) => d.seconds >= 900).length} active
-        ${ds.filter((d) => d.seconds >= 900).length === 1 ? "day" : "days"}</span
+        >${activeDays} active ${activeDays === 1 ? "day" : "days"}</span
       >
     </div>
     <div class="metric metric-streak">

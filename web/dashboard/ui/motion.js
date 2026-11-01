@@ -67,7 +67,7 @@
   }
   function chartMotion() {
     document.querySelectorAll(".chart").forEach((chart) => {
-      const line = chart.querySelector("polyline");
+      const line = chart.querySelector("path.chart-line");
       if (line)
         run(
           line,
@@ -77,11 +77,15 @@
           ],
           { duration: 1250, easing: soft },
         );
-      run(chart.querySelector("polygon"), [{ opacity: 0 }, { opacity: 1 }], {
-        duration: 1000,
-        delay: 150,
-        fill: "backwards",
-      });
+      run(
+        chart.querySelector("path.chart-area"),
+        [{ opacity: 0 }, { opacity: 1 }],
+        {
+          duration: 1000,
+          delay: 150,
+          fill: "backwards",
+        },
+      );
       const dots = [...chart.querySelectorAll("circle")];
       dots.forEach((dot, i) =>
         run(

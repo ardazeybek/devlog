@@ -1,5 +1,9 @@
+// Project table; each project name opens its detail view.
 import { esc, duration } from "../helpers.js";
+import { emptyState } from "./empty.js";
+import { colorFor } from "../analytics.js";
 
+// Builds the project table for the selected range.
 export function tableCard({ projects, total }) {
   const table = /* HTML */ `<article class="card">
     <h2>Project activity</h2>
@@ -18,7 +22,16 @@ export function tableCard({ projects, total }) {
                 .map(
                   ([p, v]) =>
                     /* HTML */ `<tr>
-                      <td>${esc(p)}</td>
+                      <td>
+                        <i class="swatch" style="background:${colorFor(p)}"></i>
+                        <button
+                          class="link-button"
+                          type="button"
+                          data-project="${esc(p)}"
+                        >
+                          ${esc(p)}
+                        </button>
+                      </td>
                       <td>${duration(v)}</td>
                       <td>${Math.round((v / Math.max(1, total)) * 100)}%</td>
                     </tr>`,
@@ -26,7 +39,7 @@ export function tableCard({ projects, total }) {
                 .join("")}
             </tbody>
           </table>`
-        : '<div class="empty">No projects yet.</div>'
+        : emptyState("No projects yet. Edit a file in VS Code to start.")
     }
   </article>`;
 

@@ -1,4 +1,6 @@
 import { esc, duration, bar } from "../helpers.js";
+import { emptyState } from "./empty.js";
+import { colorFor } from "../analytics.js";
 
 export function languageCard({ langs, total }) {
   const language = /* HTML */ `<article class="card">
@@ -13,10 +15,10 @@ export function languageCard({ langs, total }) {
                       >${DevlogLanguages.icon(l)}${esc(DevlogLanguages.name(l))}</strong
                     ><span>${duration(v)}</span>
                   </div>
-                  ${bar(v, total)}`,
+                  ${bar(v, total, colorFor(l))}`,
             )
             .join("")
-        : '<div class="empty">No activity yet.</div>'
+        : emptyState("No activity yet. Your languages appear here.")
     }
   </article>`;
 

@@ -1,6 +1,6 @@
 {
   "name": "devlog-coding-activity",
-  "displayName": "devlog \u2014 Coding Activity",
+  "displayName": "devlog — Coding Activity",
   "description": "Track your coding time and see your progress.",
   "version": "1.2.0",
   "publisher": "ardazeybek",
@@ -36,6 +36,13 @@
           "maximum": 720,
           "description": "Daily active coding goal in minutes."
         },
+        "devlog.weeklyGoalMinutes": {
+          "type": "integer",
+          "default": 600,
+          "minimum": 60,
+          "maximum": 10080,
+          "description": "Weekly active coding goal in minutes."
+        },
         "devlog.excludedPaths": {
           "type": "array",
           "items": {
@@ -50,6 +57,45 @@
             "generated"
           ],
           "description": "Folder names excluded from activity tracking."
+        },
+        "devlog.idleTimeoutSeconds": {
+          "type": "integer",
+          "default": 60,
+          "minimum": 15,
+          "maximum": 600,
+          "description": "Seconds without edits before devlog stops counting active time."
+        },
+        "devlog.excludedProjects": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "description": "Project names that devlog never tracks."
+        },
+        "devlog.projectGroups": {
+          "type": "object",
+          "default": {},
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "description": "Groups of project names, for example {\"Learning\": [\"course-app\"]}."
+        },
+        "devlog.projectAliases": {
+          "type": "object",
+          "default": {},
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Renamed projects, mapping an old name to its current name."
+        },
+        "devlog.weeklySummaryNotification": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show last week's summary in VS Code on Sunday evenings."
         }
       }
     },

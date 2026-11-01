@@ -3,7 +3,14 @@ let current =
     new URLSearchParams(location.search || "").get("tab") === "awards"
       ? "awards"
       : "overview",
-  state = { days: {}, goal: 120 },
+  state = {
+    days: {},
+    goal: 120,
+    weeklyGoal: 600,
+    projectGroups: {},
+    journal: [],
+    trackingStatus: "waiting",
+  },
   token = location.hash.slice(1);
 if (token) {
   sessionStorage.setItem("devlog-token", token);

@@ -1,23 +1,29 @@
 # Where to make a change
 
-| Desired change                                   | Start here                                   | Check next                                                |
-| ------------------------------------------------ | -------------------------------------------- | --------------------------------------------------------- |
-| Header, navigation or page shell                 | `web/index.html`                             | Stylesheet/script order and tab IDs                       |
-| Overview or statistics layout                    | `web/dashboard/pages/activity.js`            | Reusable `components/` and `render.js`                    |
-| Metric, goal, language, project or chart markup  | `web/dashboard/components/`                  | `styles/activity.css` or `forms-and-tables.css`           |
-| Achievement filters or title display             | `web/dashboard/pages/awards.js`              | `styles/awards.css`, `titles.css` and shared rules        |
-| Daily goal form                                  | `web/dashboard/pages/settings.js`            | Settings route in `src/extension/dashboard/server.js`     |
-| Tracking eligibility or paste classification     | `src/extension/tracking/rules.js`            | `test/unit/core.test.js` and integration tracking tests   |
-| Idle, focus or pause behavior                    | `src/extension/tracking/activity-tracker.js` | `test/integration/tracking.test.js`                       |
-| Storage fields or aggregation                    | `src/extension/storage/activity-store.js`    | Existing records and storage tests                        |
-| Achievement thresholds, XP or title requirements | `src/shared/achievements.js`                 | Reward tests; preserve IDs unless planning a migration    |
-| Reward notification claims                       | `src/extension/rewards/reward-tracker.js`    | Multi-window and restart tests                            |
-| Native notification wording                      | `src/extension/index.js`                     | `test/integration/extension-rewards.test.js`              |
-| Sidebar or status text                           | `src/extension/ui/`                          | Activation and command registration                       |
-| Animation or dropdown behavior                   | `web/dashboard/ui/`                          | Associated CSS, keyboard behavior and scroll preservation |
-| Language display names or symbols                | `src/shared/languages.js`                    | Unknown language fallback and escaping                    |
-| A new browser file                               | Relevant `web/` folder                       | Import/link plus `dashboard/assets.js` allowlist          |
-| Packaged files or entry point                    | `package.json` and `.vscodeignore`           | `vsce ls --no-dependencies` and the actual VSIX           |
+| Desired change                                   | Start here                                            | Check next                                                          |
+| ------------------------------------------------ | ----------------------------------------------------- | ------------------------------------------------------------------- |
+| Header, navigation or page shell                 | `web/index.html`                                      | Stylesheet/script order and tab IDs                                 |
+| Overview or statistics layout                    | `web/dashboard/pages/activity.js`                     | Reusable `components/` and `render.js`                              |
+| Metric, goal, language, project or chart markup  | `web/dashboard/components/`                           | `styles/activity.css` or `forms-and-tables.css`                     |
+| Achievement filters or title display             | `web/dashboard/pages/awards.js`                       | `styles/awards.css`, `titles.css` and shared rules                  |
+| Daily or weekly goal form                        | `web/dashboard/pages/settings.js`                     | Settings route in `src/extension/dashboard/server.js`               |
+| Date ranges, totals or period comparisons        | `web/dashboard/analytics.js`                          | `test/unit/analytics.test.js` and `render.js`                       |
+| Reports, exports or the share card               | `web/dashboard/pages/reports.js`                      | `components/share-card.js` and `analytics.js`                       |
+| Heatmap or project detail                        | `web/dashboard/components/`                           | `analytics.js` heat levels and `styles/analytics.css`               |
+| Coding journal notes                             | `src/extension/journal/journal-store.js`              | Journal routes in `dashboard/server.js` and `components/journal.js` |
+| Session timeline or branch insights              | `web/dashboard/components/timeline.js`, `branches.js` | `tracking/activity-tracker.js` and aggregation                      |
+| Backup restore rules                             | `src/extension/storage/activity-store.js`             | `test/unit/restore.test.js` and the restore route                   |
+| Tracking eligibility or paste classification     | `src/extension/tracking/rules.js`                     | `test/unit/core.test.js` and integration tracking tests             |
+| Idle, focus or pause behavior                    | `src/extension/tracking/activity-tracker.js`          | `test/integration/tracking.test.js`                                 |
+| Storage fields or aggregation                    | `src/extension/storage/activity-store.js`             | Existing records and storage tests                                  |
+| Achievement thresholds, XP or title requirements | `src/shared/achievements.js`                          | Reward tests; preserve IDs unless planning a migration              |
+| Reward notification claims                       | `src/extension/rewards/reward-tracker.js`             | Multi-window and restart tests                                      |
+| Native notification wording                      | `src/extension/index.js`                              | `test/integration/extension-rewards.test.js`                        |
+| Sidebar or status text                           | `src/extension/ui/`                                   | Activation and command registration                                 |
+| Animation or dropdown behavior                   | `web/dashboard/ui/`                                   | Associated CSS, keyboard behavior and scroll preservation           |
+| Language display names or symbols                | `src/shared/languages.js`                             | Unknown language fallback and escaping                              |
+| A new browser file                               | Relevant `web/` folder                                | Import/link plus `dashboard/assets.js` allowlist                    |
+| Packaged files or entry point                    | `package.json` and `.vscodeignore`                    | `vsce ls --no-dependencies` and the actual VSIX                     |
 
 ## Conventions
 

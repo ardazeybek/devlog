@@ -5,7 +5,13 @@ let catalog = { scrollTop: 0 },
   x = 0,
   y = 0,
   insertions = 0;
-const nodes = { "#period": { value: "7" }, "#title": {}, "#notice": {} };
+const nodes = {
+  "#period": { value: "7" },
+  "#range-start": { value: "" },
+  "#range-end": { value: "" },
+  "#title": {},
+  "#notice": {},
+};
 nodes["#content"] = {
   set innerHTML(v) {
     insertions++;
@@ -48,7 +54,7 @@ const context = {
   },
   fetch: async () => ({
     ok: true,
-    json: async () => ({ days: {}, goal: 120 }),
+    json: async () => ({ days: {}, goal: 120, weeklyGoal: 600 }),
   }),
   setInterval() {},
   setTimeout() {},

@@ -42,11 +42,13 @@ devlog/
 | File                           | Owns                                                                                           | Does not own                                |
 | ------------------------------ | ---------------------------------------------------------------------------------------------- | ------------------------------------------- |
 | `src/extension/index.js`       | Storage setup, service construction, API snapshot, native reward notifications, final disposal | Edit rules, HTTP routing, HTML rendering    |
+| `tracking/git-branch.js`       | Reads the checked-out branch from `.git/HEAD` with a short cache                               | Activity counting                           |
+| `journal/journal-store.js`     | Validated coding notes in `journal.json`, outside activity aggregation                         | Time tracking or dashboard rendering        |
 | `tracking/rules.js`            | Date keys, edit classification, file exclusions, document eligibility, language detection      | VS Code listeners or persistence            |
 | `tracking/activity-tracker.js` | Per-window activity record, editor listeners, idle state, five-second timer, pause, saving     | Browser HTTP or notification presentation   |
-| `storage/activity-store.js`    | Empty-day schema, validated aggregation, atomic JSON writes                                    | UI or time eligibility                      |
+| `storage/activity-store.js`    | Empty-day schema, validated aggregation, atomic JSON writes, backup restore                    | UI or time eligibility                      |
 | `rewards/reward-tracker.js`    | Earned-event conversion, locking, already-seen IDs and recent events                           | Achievement thresholds or UI                |
-| `dashboard/server.js`          | Loopback server lifecycle, authentication, API routes, settings writes, response headers       | Counting activity                           |
+| `dashboard/server.js`          | Loopback server lifecycle, authentication, API routes, settings writes, restore, headers       | Counting activity                           |
 | `dashboard/assets.js`          | Explicit URL-to-file map                                                                       | Directory serving or private storage access |
 | `ui/launcher.js`               | Sidebar entries and command registration                                                       | Tracking decisions                          |
 | `ui/status-bar.js`             | Status icon and tooltip presentation                                                           | Recorded activity                           |
@@ -55,21 +57,26 @@ Paths in the first column after `index.js` are relative to `src/extension/`.
 
 ## Browser modules
 
-| File                 | Responsibility                                                                                           |
-| -------------------- | -------------------------------------------------------------------------------------------------------- |
-| `state.js`           | Captures the URL token into session storage; exposes live state bindings and setters                     |
-| `app.js`             | Polls `/api/stats`, displays connection issues, responds to navigation and visibility                    |
-| `render.js`          | Computes the selected date range, composes pages, binds handlers, restores scroll and invokes UI effects |
-| `helpers.js`         | Escaping, local calendar keys, durations, totals, grouping, current streak, bars and flame markup        |
-| `pages/activity.js`  | Overview and statistics page composition                                                                 |
-| `pages/awards.js`    | Achievement filters, award cards, next badges, title catalog and filter handlers                         |
-| `pages/settings.js`  | Daily-goal form, validation, settings request and community links                                        |
-| `components/`        | Chart SVG, metric summary, language breakdown, daily-goal card and project table                         |
-| `ui/controls.js`     | Accessible custom selects backed by native values and change events                                      |
-| `ui/motion.js`       | Card, chart, counter, hover and button animations; animation cleanup before rendering                    |
-| `ui/celebrations.js` | Quiet reward cards, pending events while hidden and confetti                                             |
+| File                                                          | Responsibility                                                                                                 |
+| ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `state.js`                                                    | Captures the URL token into session storage; exposes live state bindings and setters                           |
+| `app.js`                                                      | Polls `/api/stats`, displays connection issues, responds to navigation and visibility                          |
+| `render.js`                                                   | Computes the selected date range, composes pages, binds handlers, restores scroll and invokes UI effects       |
+| `helpers.js`                                                  | Escaping, local calendar keys, current streak, bars and flame markup; re-exports summaries from `analytics.js` |
+| `analytics.js`                                                | Pure date ranges, period pairs, totals, heat levels, sentences, CSV and backup documents                       |
+| `pages/reports.js`                                            | Weekly and monthly reports, share-card download and range exports                                              |
+| `components/heatmap.js`, `project-detail.js`, `share-card.js` | Year heatmap, project trend, and the SVG share card                                                            |
+| `pages/activity.js`                                           | Overview and statistics page composition                                                                       |
+| `pages/awards.js`                                             | Achievement filters, award cards, next badges, title catalog and filter handlers                               |
+| `pages/settings.js`                                           | Daily and weekly goal forms, backup download and restore, community links                                      |
+| `components/`                                                 | Chart SVG, metric summary, language breakdown, daily-goal card and project table                               |
+| `ui/controls.js`                                              | Accessible custom selects backed by native values and change events                                            |
+| `ui/motion.js`                                                | Card, chart, counter, hover and button animations; animation cleanup before rendering                          |
+| `ui/celebrations.js`                                          | Quiet reward cards, pending events while hidden and confetti                                                   |
 
 Paths are relative to `web/dashboard/`.
+
+`analytics.js` is pure and has no DOM access, so `test/unit/analytics.test.js` loads it directly.
 
 `ui/` scripts expose `DevlogControls`, `DevlogMotion` and `DevlogCelebrations`. They remain classic scripts to keep their independent initialization and optional hooks. `src/shared/achievements.js` and `languages.js` expose `DevlogAchievements` and `DevlogLanguages` in the browser, and `module.exports` in Node. These five globals are intentional; dashboard state and page functions use explicit ES imports instead of implicit cross-file globals.
 
@@ -91,6 +98,7 @@ Paths are relative to `web/dashboard/`.
 12. `community.css`: community links in Settings.
 13. `select.css`: glass listboxes and keyboard focus styling.
 14. `celebrations.css`: reward cards, confetti and final small-screen overrides.
+15. `analytics.css`: range controls, heatmap, reports, project details and backup controls.
 
 The existing cascade is preserved deliberately. Some selectors appear in both base component files and later surface/palette files: the former own layout, the latter override presentation. Moving a rule across files can change specificity precedence even when its text is unchanged.
 

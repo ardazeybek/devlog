@@ -1,4 +1,5 @@
 import { state } from "./state.js";
+import { duration, sum, groups } from "./analytics.js";
 const $ = (s) => document.querySelector(s),
   esc = (s) =>
     String(s).replace(
@@ -14,10 +15,6 @@ const $ = (s) => document.querySelector(s),
     );
 const key = (d) =>
   `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
-const duration = (s) => {
-  const m = Math.floor((s || 0) / 60);
-  return `${Math.floor(m / 60)}h ${m % 60}m`;
-};
 const number = (n) => Math.floor(n || 0).toLocaleString("en-US");
 function dates(n) {
   return Array.from({ length: n }, (_, i) => {
@@ -25,16 +22,6 @@ function dates(n) {
     d.setDate(d.getDate() - n + 1 + i);
     return key(d);
   });
-}
-function sum(ds, k) {
-  return ds.reduce((s, d) => s + (d[k] || 0), 0);
-}
-function groups(ds, k) {
-  const r = Object.create(null);
-  ds.forEach((d) =>
-    Object.entries(d[k] || {}).forEach(([n, v]) => (r[n] = (r[n] || 0) + v)),
-  );
-  return Object.entries(r).sort((a, b) => b[1] - a[1]);
 }
 function streak() {
   let n = 0,
@@ -46,10 +33,10 @@ function streak() {
   }
   return n;
 }
-function bar(v, max) {
+function bar(v, max, color = "") {
   return /* HTML */ `<div class="bar">
     <i
-      style="width:${Math.max(0, Math.min(100, (v / Math.max(1, max)) * 100))}%"
+      style="width:${Math.max(0, Math.min(100, (v / Math.max(1, max)) * 100))}%;${color ? `background:${color}` : ""}"
     ></i>
   </div>`;
 }

@@ -66,16 +66,34 @@ On a credited tick, the extension saves first and then checks rewards. A recent 
 
 The server starts on demand, binds `127.0.0.1` on a dynamic port, and is closed during extension disposal. A random 32-byte session token reaches the browser through the URL fragment and is then retained in session storage. The browser removes the fragment from its address bar. API calls send `Authorization: Bearer <token>`.
 
-| Route               | Method     | Contract                                                       |
-| ------------------- | ---------- | -------------------------------------------------------------- |
-| `/api/stats`        | GET        | `{ days, goal, paused, live, languages, rewardEvents, issue }` |
-| `/api/settings`     | POST       | JSON `{ dailyGoalMinutes }`; returns `{ goal }`                |
-| URLs in `assets.js` | GET / HEAD | Explicitly approved HTML, JS and CSS only                      |
+| Route                 | Method     | Contract                                                                                                                           |
+| --------------------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `/api/stats`          | GET        | `{ days, goal, weeklyGoal, paused, trackingStatus, projectAliases, projectGroups, journal, live, languages, rewardEvents, issue }` |
+| `/api/journal`        | GET / POST | GET returns `{ notes }`; POST `{ date, project, text }` returns `{ note }` (201)                                                   |
+| `/api/journal/remove` | POST       | `{ id }` returns `{ removed }`                                                                                                     |
+| `/api/days/delete`    | POST       | `{ date }` for a past day; returns `{ deleted }`                                                                                   |
+| `/api/settings`       | POST       | JSON with exactly one of `{ dailyGoalMinutes }` or `{ weeklyGoalMinutes }`; returns `{ goal, weeklyGoal }`                         |
+| `/api/restore`        | POST       | Version-1 backup JSON up to 10 MB; returns `{ restored, skipped }`                                                                 |
+| URLs in `assets.js`   | GET / HEAD | Explicitly approved HTML, JS and CSS only                                                                                          |
 
-The settings goal must be an integer from 15 to 720. The request body is limited to 1,024 bytes and requires JSON content type. API requests check token, Host and any supplied Origin. Static files use the explicit allowlist; no filesystem directory or extension-private module is served. Headers disable caching and sniffing and set the existing content-security and referrer policies.
+The daily goal must be an integer from 15 to 720 minutes; the weekly goal from 60 to 10080 minutes. The request body is limited to 1,024 bytes and requires JSON content type. API requests check token, Host and any supplied Origin. Static files use the explicit allowlist; no filesystem directory or extension-private module is served. Headers disable caching and sniffing and set the existing content-security and referrer policies.
 
 `issue` is `STORAGE_WRITE_FAILED`, `PARTIAL_DATA` or `null`. A stats storage exception returns HTTP 500; the browser distinguishes expired sessions, storage errors and disconnections.
 
+## Sessions, branches and journal
+
+Each day record may carry optional `sessions` (`{ start, end, project, language }` in minutes since local midnight, merged when activity continues within two minutes) and `branches` (keys of `project` + U+001F + branch name, read from `.git/HEAD` of the workspace folder). Both are optional, so version-1 files without them stay valid. Journal notes live in `journal.json` with `version: 2`, which activity aggregation skips.
+
+`trackingStatus` is one of `counting`, `paused`, `unfocused`, `idle`, `excluded` or `waiting`. The settings `devlog.idleTimeoutSeconds` (15-600) and `devlog.excludedProjects` change tracking. `projectAliases` renames projects in the browser before any view is built.
+
+## Deleting a day
+
+`POST /api/days/delete` accepts only past days. `deleteDay()` writes the date to `deleted-days.json` (version 2) and removes it from every version-1 file. Aggregation hides listed days in all windows. A backup restore that contains a deleted day removes it from the list and writes the backup values.
+
+## Backup and restore
+
+Backups are version-1 documents of day records. `restoreDays()` in `storage/activity-store.js` skips every day the device already has, drops invalid counters and writes the remaining days to `restore-<hash>.json`. The content hash makes a repeated restore of the same file a no-op. Exports and backups are produced in the browser from the same API snapshot.
+
 ## Render lifecycle
 
-The app polls every ten seconds and when the document becomes visible. Unchanged snapshots do not rebuild the DOM. Refresh avoids rebuilding Settings and active achievement filters so typing is not interrupted. On the same tab, `render()` captures page position and the title catalog's independent scroll position, replaces content, rebinds handlers, restores both positions, enhances selects and starts appropriate visual effects. Celebration cards live outside the replaced content container.
+The selected range (7, 30, 90 days, this year, all time or custom dates) is resolved in `analytics.js`; the Reports page and the heatmap use the same day records. The app polls every ten seconds and when the document becomes visible. Unchanged snapshots do not rebuild the DOM. Refresh avoids rebuilding Settings and active achievement filters so typing is not interrupted. On the same tab, `render()` captures page position and the title catalog's independent scroll position, replaces content, rebinds handlers, restores both positions, enhances selects and starts appropriate visual effects. Celebration cards live outside the replaced content container.

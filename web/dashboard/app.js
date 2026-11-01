@@ -1,7 +1,10 @@
 // Browser entry: fetch API snapshots, handle navigation and schedule refreshes.
 import { current, state, token, setCurrent, setState } from "./state.js";
 import { $ } from "./helpers.js";
+import { remapProjects, statusMessage } from "./analytics.js";
 import { render, renderedTab } from "./render.js";
+import { enhanceDateInputs } from "./ui/date-wheel.js";
+enhanceDateInputs();
 function showIssue(message = "") {
   const el = $("#notice");
   el.textContent = message ? "⚠ " + message : "";
@@ -21,6 +24,7 @@ async function refresh() {
     });
     if (!r.ok) throw Object.assign(Error(), { status: r.status });
     const nextState = await r.json();
+    nextState.days = remapProjects(nextState.days, nextState.projectAliases);
     const changed = JSON.stringify(state) !== JSON.stringify(nextState);
     setState(nextState);
     globalThis.DevlogCelebrations?.receive(state.rewardEvents || []);
@@ -29,9 +33,7 @@ async function refresh() {
         ? "devlog could not save your time. Check your free disk space."
         : state.issue === "PARTIAL_DATA"
           ? "Some saved activity could not be loaded."
-          : state.paused
-            ? "Tracking is paused. Resume it in VS Code."
-            : "",
+          : statusMessage(state.trackingStatus),
     );
     if (
       (changed || renderedTab === null) &&
@@ -59,7 +61,8 @@ document.querySelectorAll("nav button").forEach(
       render();
     }),
 );
-$("#period").onchange = () => render("period");
+for (const id of ["#period", "#range-start", "#range-end"])
+  $(id).onchange = () => render("period");
 document.addEventListener("visibilitychange", () => {
   if (!document.hidden) refresh();
   else

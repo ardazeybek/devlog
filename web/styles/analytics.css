@@ -1,0 +1,500 @@
+/* Ranges, heatmap, reports, project details and backup controls. */
+.range-custom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+  font-size: 13px;
+  color: #577466;
+}
+.range-custom input {
+  font: inherit;
+  padding: 8px 10px;
+  border-radius: 12px;
+  border: var(--edge);
+  background: var(--glass);
+}
+.range-custom p {
+  flex-basis: 100%;
+  margin: 0;
+}
+.heatmap {
+  display: grid;
+  grid-template-rows: repeat(7, 13px);
+  grid-auto-flow: column;
+  grid-auto-columns: 13px;
+  gap: 4px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+}
+.heat-cell {
+  width: 13px;
+  height: 13px;
+  border: 0;
+  padding: 0;
+  border-radius: 4px;
+  display: inline-block;
+  cursor: pointer;
+}
+.heat-cell.level-0 {
+  background: #e3ece7;
+}
+.heat-cell.level-1 {
+  background: #b7e3cf;
+}
+.heat-cell.level-2 {
+  background: #73c9a2;
+}
+.heat-cell.level-3 {
+  background: #33a677;
+}
+.heat-cell.level-4 {
+  background: #14795a;
+}
+.heat-cell:focus-visible {
+  outline: 2px solid #14956b;
+  outline-offset: 2px;
+}
+.heat-legend {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 10px;
+  font-size: 12px;
+}
+.heat-legend .heat-cell {
+  cursor: default;
+}
+.day-detail {
+  margin-top: 16px;
+}
+.day-detail h3 {
+  margin: 0 0 6px;
+}
+.report-lines {
+  margin: 0;
+  padding-left: 20px;
+  line-height: 1.6;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+.check {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  font-size: 14px;
+}
+.link-button {
+  border: 0;
+  padding: 0;
+  background: none;
+  font: inherit;
+  color: #14795a;
+  text-align: left;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.project-detail {
+  margin-top: 20px;
+}
+.detail-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 14px;
+  margin-bottom: 14px;
+}
+.detail-stats b {
+  display: block;
+  font-size: 20px;
+  margin-top: 4px;
+}
+.trend {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.trend rect {
+  fill: #33a677;
+}
+.restore-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+/* Timeline, journal controls. */
+.timeline-bar {
+  position: relative;
+  height: 18px;
+  border-radius: 9px;
+  background: #e3ece7;
+  overflow: hidden;
+  margin: 12px 0;
+}
+.timeline-bar i {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: #33a677;
+}
+.timeline-list {
+  margin: 0;
+  padding-left: 18px;
+  line-height: 1.7;
+}
+.journal-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 14px 0;
+}
+.journal-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  color: #577466;
+}
+.journal-form input,
+.journal-form textarea {
+  font: inherit;
+  padding: 8px 10px;
+  border-radius: 12px;
+  border: var(--edge);
+  background: var(--glass);
+}
+.journal-text {
+  grid-column: 1 / -1;
+}
+.journal-form .actions {
+  grid-column: 1 / -1;
+  align-items: center;
+}
+.journal-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.journal-item {
+  padding: 12px 0;
+  border-top: 1px solid #d0ddd6;
+}
+.journal-item p {
+  margin: 6px 0;
+  white-space: pre-wrap;
+}
+@media (max-width: 640px) {
+  .journal-form {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Scroll-wheel date picker. */
+.date-wheel {
+  position: relative;
+  display: inline-block;
+}
+.date-trigger {
+  font: inherit;
+  padding: 9px 14px;
+  border-radius: 14px;
+  border: var(--edge);
+  background: var(--glass);
+  box-shadow: var(--shadow);
+  color: inherit;
+  cursor: pointer;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+.date-panel {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 8px);
+  left: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 84px);
+  gap: 6px;
+  padding: 12px;
+  border-radius: 20px;
+  border: var(--edge);
+  background: #ffffffe8;
+  box-shadow: 0 18px 40px #1d3b3026;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+.date-panel[hidden] {
+  display: none;
+}
+.wheel {
+  height: 160px;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  scrollbar-width: none;
+  mask-image: linear-gradient(transparent, #000 35%, #000 65%, transparent);
+  -webkit-mask-image: linear-gradient(
+    transparent,
+    #000 35%,
+    #000 65%,
+    transparent
+  );
+}
+.wheel::-webkit-scrollbar {
+  display: none;
+}
+.wheel-pad {
+  height: 60px;
+}
+.wheel-item {
+  display: block;
+  width: 100%;
+  height: 40px;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: #577466;
+  scroll-snap-align: center;
+  cursor: pointer;
+  border-radius: 10px;
+}
+.wheel-item:hover {
+  color: #14795a;
+  background: #14956b14;
+}
+.date-done {
+  grid-column: 1 / -1;
+  margin-top: 6px;
+  padding: 8px;
+  border: 0;
+  border-radius: 12px;
+  background: #14956b;
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Color language: deep teal is the brand, amber marks a goal that was reached. */
+:root {
+  --brand: #0f6e74;
+  --warm: #d97706;
+}
+.metrics .metric.metric-today {
+  background: var(--glass);
+  color: inherit;
+  border-color: transparent;
+}
+.metrics .metric.metric-today:after {
+  display: none;
+}
+.metrics .metric.metric-today .metric-label {
+  color: var(--muted);
+}
+.metrics .metric.metric-today .metric-icon {
+  background: #0f6e7418;
+  color: var(--brand);
+}
+.metrics .metric.metric-today b {
+  color: var(--brand);
+}
+.today-progress {
+  margin-top: 14px;
+  height: 8px;
+  border-radius: 8px;
+  background: #0f6e7419;
+  overflow: hidden;
+}
+.today-progress i {
+  display: block;
+  height: 100%;
+  border-radius: 8px;
+  background: linear-gradient(90deg, var(--brand), #3aa6ab);
+}
+.goal-card.is-complete .goal-ring {
+  background: conic-gradient(var(--warm) calc(var(--progress) * 1), #e7eee9 0);
+}
+.goal-card.is-complete .goal-caption strong {
+  color: var(--warm);
+}
+.goal-footer {
+  margin: 10px 0 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+.swatch {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 3px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+.empty {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  padding: 34px 0;
+  color: var(--muted);
+}
+.empty svg {
+  width: 52px;
+  height: 52px;
+  color: var(--brand);
+  opacity: 0.7;
+}
+.empty p {
+  margin: 0;
+  font-size: 13px;
+}
+.chart circle:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 3px;
+}
+.chart circle {
+  cursor: default;
+}
+
+/* Compact layout for narrow windows. */
+@media (max-width: 720px) {
+  .card,
+  .metric {
+    padding: 18px;
+  }
+  .metrics {
+    gap: 12px;
+  }
+  .metric {
+    min-height: 0;
+  }
+  .heat-cell {
+    width: 11px;
+    height: 11px;
+  }
+  .heatmap {
+    grid-template-rows: repeat(7, 11px);
+    grid-auto-columns: 11px;
+  }
+  .table {
+    font-size: 13px;
+  }
+}
+
+/* Dark appearance follows the system setting. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    background: #0d1714;
+    color: #dcebe4;
+    --muted: #9db5a9;
+    --accent: #5fc5a0;
+    --glass: linear-gradient(135deg, #ffffff12 0%, #ffffff08 100%);
+    --edge: 1px solid #ffffff1c;
+    --shadow: inset 0 1px 0 #ffffff12, 0 14px 32px #00000050;
+  }
+  :root:not([data-theme="light"]) body {
+    background: #0d1714;
+  }
+  :root:not([data-theme="light"]) .ambient {
+    opacity: 0.25;
+  }
+  :root:not([data-theme="light"]) .metric-label,
+  :root:not([data-theme="light"]) .muted,
+  :root:not([data-theme="light"]) .row span,
+  :root:not([data-theme="light"]) .chart text,
+  :root:not([data-theme="light"]) th,
+  :root:not([data-theme="light"]) .empty,
+  :root:not([data-theme="light"]) .goal-footer,
+  :root:not([data-theme="light"]) .goal-caption p {
+    color: var(--muted);
+  }
+  :root:not([data-theme="light"]) h1,
+  :root:not([data-theme="light"]) h2,
+  :root:not([data-theme="light"]) h3,
+  :root:not([data-theme="light"]) b,
+  :root:not([data-theme="light"]) strong {
+    color: #eef7f2;
+  }
+  :root:not([data-theme="light"]) .heat-cell.level-0 {
+    background: #22332d;
+  }
+  :root:not([data-theme="light"]) .date-panel {
+    background: #13211ce8;
+  }
+  :root:not([data-theme="light"]) .metrics .metric.metric-today b,
+  :root:not([data-theme="light"]) .link-button {
+    color: #7fd9b6;
+  }
+  :root:not([data-theme="light"]) .metrics .metric.metric-today .metric-icon {
+    color: #7fd9b6;
+    background: #ffffff14;
+  }
+  :root:not([data-theme="light"]) .today-progress {
+    background: #ffffff14;
+  }
+  :root:not([data-theme="light"]) .range-custom input,
+  :root:not([data-theme="light"]) .journal-form input,
+  :root:not([data-theme="light"]) .journal-form textarea,
+  :root:not([data-theme="light"]) .focus-controls input {
+    color: #eef7f2;
+    background: #ffffff10;
+  }
+}
+
+/* Stronger edges and text when the system asks for more contrast. */
+@media (prefers-contrast: more) {
+  .card,
+  .metric {
+    border: 2px solid currentColor;
+  }
+  .muted,
+  .metric-label {
+    color: #1f3a30;
+  }
+  .heat-cell.level-0 {
+    outline: 1px solid #1f3a30;
+  }
+  .chart circle {
+    stroke-width: 3;
+  }
+}
+
+/* Printing or saving the Reports page as PDF keeps only the content. */
+@media print {
+  header,
+  .notice,
+  .range-custom,
+  .date-wheel,
+  .actions,
+  .journal-form,
+  .journal-item button,
+  #celebrations,
+  .ambient,
+  button {
+    display: none !important;
+  }
+  :root,
+  body {
+    background: #fff !important;
+    color: #111 !important;
+  }
+  .card,
+  .metric {
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    background: #fff !important;
+    border: 1px solid #ccc !important;
+    break-inside: avoid;
+  }
+}
+.link-button.danger {
+  color: #b42318;
+  margin-top: 14px;
+}

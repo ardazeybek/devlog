@@ -1,8 +1,14 @@
-import { duration, number, sum } from "../helpers.js";
+// Overview and statistics page composition for the selected range.
+import { duration, number, esc } from "../helpers.js";
+import { timeline } from "../components/timeline.js";
 import { badges } from "./awards.js";
 import { chart } from "../components/chart.js";
+import { heatmap } from "../components/heatmap.js";
+import { state } from "../state.js";
+import { dateKey } from "../analytics.js";
 
-export function overviewPage({ keys, total, language, goal }) {
+// Builds the overview cards, including the weekly goal.
+export function overviewPage({ keys, total, language, goal, weekly }) {
   return /* HTML */ `<section class="grid">
       <article class="card">
         <h2>Active coding time</h2>
@@ -17,9 +23,12 @@ export function overviewPage({ keys, total, language, goal }) {
         <div class="badges">${badges()}</div>
       </article>
       ${goal}
-    </section>`;
+    </section>
+    <section class="grid">${weekly}</section>`;
 }
-export function statisticsPage({ keys, language, ds }) {
+
+// Builds the statistics cards, the year heatmap and the selected day detail.
+export function statisticsPage({ today, keys, language, selectedDay }) {
   return /* HTML */ `<section class="grid">
       <article class="card">
         <h2>Daily activity</h2>
@@ -27,17 +36,29 @@ export function statisticsPage({ keys, language, ds }) {
       </article>
       ${language}
     </section>
-    <section class="metrics">
-      <div class="metric">
-        <span class="muted">Lines added</span><b>${number(sum(ds, "added"))}</b>
+    <article class="card">
+      <h2>Last 365 days</h2>
+      ${heatmap(today, state.goal)}
+      <div class="day-detail" id="day-detail" aria-live="polite">
+        ${selectedDay ? dayDetail(selectedDay, dateKey(today)) : '<p class="muted">Select a day to see its details.</p>'}
       </div>
-      <div class="metric">
-        <span class="muted">Lines removed</span
-        ><b>${number(sum(ds, "removed"))}</b>
-      </div>
-      <div class="metric">
-        <span class="muted">Pasted characters</span
-        ><b>${number(sum(ds, "bulk"))}</b>
-      </div>
-    </section>`;
+    </article>`;
+}
+
+// Builds the details of one day from the heatmap.
+function dayDetail(day, today) {
+  const record = state.days[day] || {};
+  const canDelete = day < today;
+  const projects = Object.entries(record.projects || {}).sort(
+    (a, b) => b[1] - a[1],
+  );
+  return /* HTML */ `<h3>${esc(day)}</h3>
+    <p>
+      ${duration(record.seconds)} active · ${number(record.typed)} typed
+      characters
+    </p>
+    <p class="muted">
+      ${projects.length ? projects.map(([name, seconds]) => `${esc(name)} (${duration(seconds)})`).join(", ") : "No projects recorded."}
+    </p>
+    ${timeline(record)}${canDelete ? `<button type="button" class="link-button danger" data-delete-day="${esc(day)}">Delete this day's record</button>` : ""}`;
 }
